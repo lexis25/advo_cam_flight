@@ -1,8 +1,62 @@
-
+import java.util.Calendar;
 
 public abstract class Board {
 
-    static String[] createCoupleArray(String[] arrival, String[] departing) {// trouble with last element
+
+    private String[] table;
+
+    void setTimeIntervalTable(int hourStart, int minuteStart, int hourFinish, int minuteFinish, int dayEnd) {
+
+        Calendar present = Calendar.getInstance();
+        present.set(present.HOUR_OF_DAY, hourStart);
+        present.set(present.MINUTE, minuteStart);
+
+        Calendar future = Calendar.getInstance();
+        future.set(future.DATE, dayEnd);
+        future.set(future.HOUR_OF_DAY, hourFinish);
+        future.set(future.MINUTE, minuteFinish);
+
+        int[] interval = new int[2];
+
+        for (int i = 0; i < table.length; i += 4) {
+            if (table[i] != null) {
+                if (table[i + 2].length() == 5 ||
+                        Integer.parseInt(table[i + 2].substring(0, 2)) >= present.get(present.HOUR_OF_DAY) ||
+                        Integer.parseInt(table[i + 2].substring(3, 5)) >= present.get(present.MINUTE)) {
+                    interval[0] = i;
+                    break;
+                }
+            }
+        }
+        for (int j = table.length; j > 0; j -= 4) {
+            if (table[j] != null) {
+                if (table[j + 2].length() == 16 ||
+                        Integer.parseInt(table[j + 2].substring(0, 2)) <= future.get(future.HOUR_OF_DAY) ||
+                        Integer.parseInt(table[j + 2].substring(3, 5)) <= future.get(future.MINUTE) ||
+                        Integer.parseInt(table[j + 2].substring(6, 8)) == future.get(future.DATE)) {
+                    interval[1] = j;
+                    break;
+                }
+            }
+        }
+       this.table = cutArray(interval[0],interval[1],table);
+    }
+
+    private String[] cutArray(int startIndex, int finishIndex, String[] table) {
+        String[] cleanArray = new String[table.length];
+        int count = 0;
+        for (int i = startIndex; i < finishIndex; i++) {
+            cleanArray[count] = table[i];
+            count++;
+        }
+        return cleanArray;
+    }
+
+    String[] getTable() {
+        return table;
+    }
+
+    static String[] setCreateCoupleArray(String[] arrival, String[] departing) {// trouble with last element
         String[] couple = new String[arrival.length];
         int counter = 0;
         int coin = 0;
