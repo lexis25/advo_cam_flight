@@ -17,11 +17,14 @@ public class WriterFolder {
         String[] departing = tableDeparting.getTable();
         String[] arrival = tableArrival.getTable();
 
-        createSchedule(arrival, "прилет.txt");
-        createSchedule(departing, "вылет.txt");
+        String[] cleanDeparting = Board.setTimeIntervalTable(7, 30, 7, 30, 10, departing);
+        String[] cleanArrival = Board.setTimeIntervalTable(7, 30, 7, 30, 10, arrival);
 
-        createFolders(arrival);
-        createFolders(departing);
+        createSchedule(cleanArrival, "прилет.txt");
+        createSchedule(cleanDeparting, "вылет.txt");
+
+        createFolders(cleanArrival);
+        createFolders(cleanDeparting);
 
     }
 
@@ -35,10 +38,10 @@ public class WriterFolder {
             if (schedule[i] != null) {
                 if (schedule[i + 2].length() == 16) {
                     if (Integer.parseInt(schedule[i + 2].substring(6, 8)) == nextDay.get(nextDay.DATE)) {
-                        new File(PATH_FLASH_DRIVE + formatDate + "/" + "3" + schedule[i + 1] + " " + schedule[i]).mkdir();
+                        new File(PATH_FLASH_DRIVE + formatDate + "/" + schedule[i + 1] + " " + schedule[i]).mkdir();
                     }
                 } else {
-                    new File(PATH_FLASH_DRIVE + "3" + schedule[i + 1] + schedule[i]).mkdir();
+                    new File(PATH_FLASH_DRIVE + "3" + schedule[i + 1] + " " + schedule[i]).mkdir();
                 }
             }
         }
@@ -49,7 +52,7 @@ public class WriterFolder {
             FileWriter writer = new FileWriter(PATH_FLASH_DRIVE + "/" + fileName);
             for (int i = 0; i < schedule.length; i += 4) {
                 if (schedule[i] != null) {
-                    writer.write(" | " + schedule[i] + "| " + schedule[i + 1] + "| " + schedule[i + 2] + "| " + schedule[i + 3]);
+                    writer.write(" | " + schedule[i] + "| " + schedule[i + 1] + "| " + schedule[i + 2]);
                     writer.write("\r" + "\n");
                 }
             }

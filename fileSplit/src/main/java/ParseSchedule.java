@@ -3,6 +3,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import java.util.Calendar;
+
 public class ParseSchedule {
 
     protected String departing = "table-departing";
@@ -24,12 +26,16 @@ public class ParseSchedule {
         return table;
     }
 
-    private String[] parseSchedule(Elements tableElements){
-        String [] tableParsed = new String[tableElements.size()];
-        for(int i = 0; i < tableElements.size(); i++){
+    private String[] parseSchedule(Elements tableElements) {
+        Calendar nextDay = Calendar.getInstance();
+        nextDay.add(nextDay.DATE, 1);
+
+        String[] tableParsed = new String[tableElements.size()];
+
+        for (int i = 0; i < tableElements.size(); i++) {
             tableParsed[i] = tableElements.get(i).text();
+
         }
         return tableParsed;
     }
-
 }

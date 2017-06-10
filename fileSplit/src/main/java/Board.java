@@ -3,9 +3,58 @@ import java.util.Calendar;
 public abstract class Board {
 
 
-    private String[] table;
+    private static String[] table;
 
-    void setTimeIntervalTable(int hourStart, int minuteStart, int hourFinish, int minuteFinish, int dayEnd) {
+    public static void main(String[] args) {
+        String[] arrival = {
+                "UH 3051", "Анталия", "11:15", "",
+                "UH 251", "Стамбул", "12:40", "",
+                "7W 4912", "Анталия", "16:00", "",
+                "PS 8332", "Анталия", "16:20", "",
+                "PS 025", "Киев (Борисполь)", "16:50", "",
+                "LO 761", "Варшава", "17:20", "",
+                "PC 426", "Стамбул", "17:40", "",
+                "7W 4812", "Анталия", "18:10", "",
+                "PS 023", "Киев (Борисполь)", "20:35", "",
+                "B2 835", "Минск", "00:15 25-05-2017", "",
+                "EY 8467", "Минск", "00:15 25-05-2017", ""
+        };
+
+        String[] departing ={
+                "TK 1474","Стамбул","09:45","",
+                "BAY 4325","Даламан","10:45","",
+                "PS 026","Киев (Борисполь)","11:05","",
+                "PS 7327","Анталия","12:05","",
+                "UH 250","Стамбул","13:20","",
+                "LO 760","Варшава","14:40","",
+                "PC 427","Стамбул","18:40","",
+                "PC 429","Стамбул","03:05 25-05-2017","",
+                "B2 836","Минск","06:00 25-05-2017","",
+                "EY 8470","Минск","06:00 25-05-2017","",
+                "PS 024","Киев (Борисполь)","07:00 25-05-2017","",
+
+
+        };
+        //System.out.println(arrival[58]);
+        //System.out.println("helloejufisefiejfisjefi");
+       // readArray(setTimeIntervalTable(8, 30, 00, 00, 25, arrival));
+       // System.out.println(arrival[0].substring(0,arrival[0].length()-2).equalsIgnoreCase(arrival[0].substring(0,arrival[0].length()-2)));
+       String[] strings = setTimeIntervalTable(07,30,07,30,25,departing);
+      // String[] wat = setCreateCoupleArray(arrival,departing);
+       readArray(strings);
+        //System.out.println(strings.length);
+        //System.out.println(strings[0] + "|" + strings [1] + "|" + strings [2] + "|" + strings[3]);
+
+    }
+
+    static void readArray(String[] string) {
+        for (int i = 0; i < string.length; i++) {
+                System.out.print(string[i]);
+                System.out.println();
+        }
+    }
+
+    static String[] setTimeIntervalTable(int hourStart, int minuteStart, int hourFinish, int minuteFinish, int dayEnd, String[] flight) {
 
         Calendar present = Calendar.getInstance();
         present.set(present.HOUR_OF_DAY, hourStart);
@@ -17,47 +66,46 @@ public abstract class Board {
         future.set(future.MINUTE, minuteFinish);
 
         int[] interval = new int[2];
+        int counter = 0;
 
-        for (int i = 0; i < table.length; i += 4) {
-            if (table[i] != null) {
-                if (table[i + 2].length() == 5 ||
-                        Integer.parseInt(table[i + 2].substring(0, 2)) >= present.get(present.HOUR_OF_DAY) ||
-                        Integer.parseInt(table[i + 2].substring(3, 5)) >= present.get(present.MINUTE)) {
+        for (int i = 0; i < flight.length; i += 4) {
+            if (flight[i] != null) {
+                if (flight[i + 2].length() == 5 &&
+                        Integer.parseInt(flight[i + 2].substring(0, 2)) >= present.get(present.HOUR_OF_DAY) &&
+                        Integer.parseInt(flight[i + 2].substring(3, 5)) >= present.get(present.MINUTE)) {
                     interval[0] = i;
                     break;
                 }
             }
         }
-        for (int j = table.length; j > 0; j -= 4) {
-            if (table[j] != null) {
-                if (table[j + 2].length() == 16 ||
-                        Integer.parseInt(table[j + 2].substring(0, 2)) <= future.get(future.HOUR_OF_DAY) ||
-                        Integer.parseInt(table[j + 2].substring(3, 5)) <= future.get(future.MINUTE) ||
-                        Integer.parseInt(table[j + 2].substring(6, 8)) == future.get(future.DATE)) {
+        for (int j = flight.length - 1; j > 0; j -= 4) {
+            if (flight[j] != null) {
+                if (flight[j - 1].length() == 16 &&
+                        Integer.parseInt(flight[j - 1].substring(0, 2)) <= future.get(future.HOUR_OF_DAY) &&
+                        Integer.parseInt(flight[j - 1].substring(3, 5)) <= future.get(future.MINUTE) &&
+                        Integer.parseInt(flight[j - 1].substring(6, 8)) == future.get(future.DATE)) {
+                    interval[1] = j;
+                    break;
+                } else if (flight[j - 1].length() < 16) {
                     interval[1] = j;
                     break;
                 }
             }
         }
-       this.table = cutArray(interval[0],interval[1],table);
-    }
-
-    private String[] cutArray(int startIndex, int finishIndex, String[] table) {
-        String[] cleanArray = new String[table.length];
-        int count = 0;
-        for (int i = startIndex; i < finishIndex; i++) {
-            cleanArray[count] = table[i];
-            count++;
+        String[] clean = new String[interval[1] - interval[0]];
+        for (int k = interval[0]; k < interval[1]; k++) {
+            clean[counter] = flight[k];
+            counter++;
         }
-        return cleanArray;
+        return clean;
     }
 
-    String[] getTable() {
+    static String[] getTable() {
         return table;
     }
 
     static String[] setCreateCoupleArray(String[] arrival, String[] departing) {// trouble with last element
-        String[] couple = new String[arrival.length];
+        String[] couple = new String[departing.length];
         int counter = 0;
         int coin = 0;
         for (int i = 0; i < arrival.length; i += 4) {
@@ -67,7 +115,8 @@ public abstract class Board {
                         if ((Integer.parseInt(arrival[i].substring(arrival[i].length() - 3)) + 1)
                                 == Integer.parseInt(departing[j].substring(departing[j].length() - 3))
                                 || (Integer.parseInt(arrival[i].substring(arrival[i].length() - 3)) - 1)
-                                == Integer.parseInt(departing[j].substring(departing[j].length() - 3))) {
+                                == Integer.parseInt(departing[j].substring(departing[j].length() - 3))
+                                || arrival[i].substring(0,arrival[i].length()-2).equalsIgnoreCase(departing[j].substring(0,departing[j].length()-2))) {
                             couple[counter] = "3" + arrival[i + 1] + " " + arrival[i] + "-" + departing[j];
                             counter++;
                             couple[counter] = arrival[i + 2];
@@ -92,36 +141,4 @@ public abstract class Board {
         return couple;
     }
 
-    static String[] addAllStringArray(String[] first, String[] second) {
-        String[] newArray = new String[first.length + second.length];
-        for (int j = 0; j < first.length; j++) {
-            newArray[j] = first[j];
-        }
-        for (int i = first.length - 1; i < second.length; i++) {
-            newArray[i] = second[i];
-        }
-        return newArray;
-    }
-
-    static boolean isUniqueArrayNumber(int[] arr1) {
-        int n = 1;
-        int so = 0;
-        boolean tip;
-        int[] array = new int[arr1.length];
-        for (int i = 0; i < arr1.length; i++) {
-            for (int j = n; j < arr1.length; j++) {
-                if (arr1[i] == arr1[j]) {
-                    array[i] = 1;
-                    so++;
-                }
-            }
-            n++;
-        }
-        if (so >= 1) {
-            tip = false;
-        } else {
-            tip = true;
-        }
-        return tip;
-    }
 }
