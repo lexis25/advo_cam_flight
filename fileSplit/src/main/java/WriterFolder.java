@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -9,20 +10,32 @@ public class WriterFolder {
 
     public static void main(String[] args) {
 
-        ParseSchedule tableDeparting = new ParseSchedule();
-        ParseSchedule tableArrival = new ParseSchedule();
+        ParseSchedule tableDepartingToday = new ParseSchedule();
+        ParseSchedule tableDepartingTomorrow = new ParseSchedule();
 
-        tableDeparting.setTable(new ParseSchedule().departing);
-        List<Flight> departing = tableDeparting.getTable();
+        ParseSchedule tableArrivalToday = new ParseSchedule();
+        ParseSchedule tableArrivalTomorrow = new ParseSchedule();
 
-        tableArrival.setTable(new ParseSchedule().arrival);
-        List<Flight> arrival = tableArrival.getTable();
+        tableDepartingToday.setTable(new ParseSchedule().departing,new ParseSchedule().TODAY);
+        List<Flight> departingToday = tableDepartingToday.getTable();
 
-        List<Flight> timeArrival = Board.getTimeIntervalTable(7, 30, 12, 7, 30, 14, arrival);
-        List<Flight> timeDeparting = Board.getTimeIntervalTable(7, 30, 12, 7, 30, 14, departing);
+        tableArrivalToday.setTable(new ParseSchedule().arrival,new ParseSchedule().TODAY);
+        List<Flight> arrivalToday = tableArrivalToday.getTable();
 
-        Board.removeFlight(timeArrival,"EY 8467");
+        tableDepartingTomorrow.setTable(new ParseSchedule().departing,new ParseSchedule().TOMORROW);
+        List<Flight> departingTomorrow = tableDepartingTomorrow.getTable();
+
+        tableArrivalTomorrow.setTable(new ParseSchedule().arrival,new ParseSchedule().TOMORROW);
+        List<Flight> arrivalTomorrow = tableArrivalTomorrow.getTable();
+
+        departingToday.addAll(departingTomorrow);
+        arrivalToday.addAll(arrivalTomorrow);
+
+        List<Flight> timeDeparting = Board.getTimeIntervalTable(7, 30, 24, 7, 30, 25, departingToday);
+        List<Flight> timeArrival = Board.getTimeIntervalTable(7, 30, 24, 7, 30, 25, arrivalToday);
+
         Board.removeFlight(timeDeparting,"EY 8470");
+        Board.removeFlight(timeArrival,"EY 8467");
 
         createSchedule(timeArrival,"прилет.txt");
         createSchedule(timeDeparting,"вылет.txt");

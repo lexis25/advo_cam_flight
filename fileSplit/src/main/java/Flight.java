@@ -1,6 +1,4 @@
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 public class Flight {
     private String numberFlight;
@@ -28,9 +26,9 @@ public class Flight {
     }
 
     public String toString(){
-        return numberFlight + " " +
-                directionFlight + " "+
-                timeFlight.getTime() + " " +
+        return numberFlight + "\n" +
+                directionFlight + "\n"+
+                timeFlight.getTime() + "\n" +
                 commentsFlight;
     }
 

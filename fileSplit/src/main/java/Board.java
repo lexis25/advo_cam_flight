@@ -84,9 +84,9 @@ public abstract class Board {
         return array;
     }
 
-    static void removeFlight(List<Flight> schedule, String numberFlight){
+    static void removeFlight(List<Flight> schedule, String numberFlight) {
         for (int i = 0; i < schedule.size(); i++) {
-            if(schedule.get(i).getNumberFlight().equalsIgnoreCase(numberFlight)){
+            if (schedule.get(i).getNumberFlight().equalsIgnoreCase(numberFlight)) {
                 schedule.remove(i);
             }
         }
