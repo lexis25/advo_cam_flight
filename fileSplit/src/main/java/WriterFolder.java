@@ -1,7 +1,6 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -9,7 +8,6 @@ public class WriterFolder {
     private static final String PATH_FLASH_DRIVE = "h:/FOLDER/";
 
     public static void main(String[] args) {
-
         ParseSchedule tableDepartingToday = new ParseSchedule();
         ParseSchedule tableDepartingTomorrow = new ParseSchedule();
 
@@ -31,8 +29,8 @@ public class WriterFolder {
         departingToday.addAll(departingTomorrow);
         arrivalToday.addAll(arrivalTomorrow);
 
-        List<Flight> timeDeparting = Board.getTimeIntervalTable(7, 30, 24, 7, 30, 25, departingToday);
-        List<Flight> timeArrival = Board.getTimeIntervalTable(7, 30, 24, 7, 30, 25, arrivalToday);
+        List<Flight> timeDeparting = Board.getTimeIntervalTable(7, 30, 28, 7, 30, 29, departingToday);
+        List<Flight> timeArrival = Board.getTimeIntervalTable(7, 30, 28, 7, 30, 29, arrivalToday);
 
         Board.removeFlight(timeDeparting,"EY 8470");
         Board.removeFlight(timeArrival,"EY 8467");

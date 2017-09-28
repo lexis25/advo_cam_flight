@@ -19,7 +19,7 @@ public class ControlPanel {
         frame.getContentPane().add(BorderLayout.EAST,createFolders);
         frame.getContentPane().add(BorderLayout.WEST,createScheduleTXT);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(480,480);
+        frame.setSize(800,600);
         frame.setVisible(true);
     }
 

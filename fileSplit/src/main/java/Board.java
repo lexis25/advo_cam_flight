@@ -45,10 +45,8 @@ public abstract class Board {
             for (int j = 0; j < departing.size(); j++) {
                 if (arrival.get(i).getTimeFlight().get(arrival.get(i).getTimeFlight().DATE) ==
                         departing.get(j).getTimeFlight().get(departing.get(j).getTimeFlight().DATE)) {
-                    if (Integer.parseInt(arrival.get(i).getNumberFlight().substring(arrival.get(i).getNumberFlight().length() - 3)) + 1
-                            == Integer.parseInt(departing.get(j).getNumberFlight().substring(departing.get(j).getNumberFlight().length() - 3))
-                            || Integer.parseInt(arrival.get(i).getNumberFlight().substring(arrival.get(i).getNumberFlight().length() - 3)) - 1
-                            == Integer.parseInt(departing.get(j).getNumberFlight().substring(departing.get(j).getNumberFlight().length() - 3))) {
+                    if (getParseNumberFlight(arrival.get(i).getNumberFlight()) + 1 == getParseNumberFlight(departing.get(j).getNumberFlight())
+                            || getParseNumberFlight(arrival.get(i).getNumberFlight()) - 1 == getParseNumberFlight(departing.get(j).getNumberFlight())) {
                         array.add(new Flight(arrival.get(i).getNumberFlight() +
                                 " " + departing.get(j).getNumberFlight(), arrival.get(i).getDirectionFlight(),
                                 arrival.get(i).getTimeFlight(), arrival.get(i).getCommentsFlight()));
@@ -66,10 +64,8 @@ public abstract class Board {
             for (int j = 0; j < departing.size(); j++) {
                 if (arrival.get(i).getTimeFlight().get(arrival.get(i).getTimeFlight().DATE) ==
                         departing.get(j).getTimeFlight().get(departing.get(j).getTimeFlight().DATE)) {
-                    if (Integer.parseInt(arrival.get(i).getNumberFlight().substring(arrival.get(i).getNumberFlight().length() - 3)) + 1
-                            == Integer.parseInt(departing.get(j).getNumberFlight().substring(departing.get(j).getNumberFlight().length() - 3))
-                            || Integer.parseInt(arrival.get(i).getNumberFlight().substring(arrival.get(i).getNumberFlight().length() - 3)) - 1
-                            == Integer.parseInt(departing.get(j).getNumberFlight().substring(departing.get(j).getNumberFlight().length() - 3))) {
+                    if (getParseNumberFlight(arrival.get(i).getNumberFlight()) + 1 == getParseNumberFlight(departing.get(j).getNumberFlight())
+                            || getParseNumberFlight(arrival.get(i).getNumberFlight()) - 1 == getParseNumberFlight(departing.get(j).getNumberFlight())) {
                         coin++;
                     }
 
@@ -90,5 +86,10 @@ public abstract class Board {
                 schedule.remove(i);
             }
         }
+    }
+
+    private static int getParseNumberFlight(String number) {
+        String[] array = number.split(" ");
+        return Integer.parseInt(array[array.length - 1]);
     }
 }
