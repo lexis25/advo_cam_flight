@@ -56,7 +56,7 @@ public class WriterFolder {
 
         for (int i = 0; i < schedule.size(); i++) {
                 if (schedule.get(i).getTimeFlight().get(Calendar.DATE) == nextDay.get(nextDay.DATE)) {
-                        new File(PATH_FLASH_DRIVE  + formatDate + "/" + "3" + schedule.get(i).getDirectionFlight() +
+                        new File(PATH_FLASH_DRIVE  + formatDate + "/" + "3 " + schedule.get(i).getDirectionFlight() +
                                 " " + schedule.get(i).getNumberFlight()).mkdir();
                 } else {
                     new File(PATH_FLASH_DRIVE +
