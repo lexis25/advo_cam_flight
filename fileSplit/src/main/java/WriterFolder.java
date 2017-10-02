@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
@@ -29,8 +30,8 @@ public class WriterFolder {
         departingToday.addAll(departingTomorrow);
         arrivalToday.addAll(arrivalTomorrow);
 
-        List<Flight> timeDeparting = Board.getTimeIntervalTable(7, 30, 28, 7, 30, 29, departingToday);
-        List<Flight> timeArrival = Board.getTimeIntervalTable(7, 30, 28, 7, 30, 29, arrivalToday);
+        List<Flight> timeDeparting = Board.getTimeIntervalTable(7, 30, 02, 7, 30, 03, departingToday);
+        List<Flight> timeArrival = Board.getTimeIntervalTable(7, 30, 02, 7, 30, 03, arrivalToday);
 
         Board.removeFlight(timeDeparting,"EY 8470");
         Board.removeFlight(timeArrival,"EY 8467");
@@ -56,7 +57,7 @@ public class WriterFolder {
 
         for (int i = 0; i < schedule.size(); i++) {
                 if (schedule.get(i).getTimeFlight().get(Calendar.DATE) == nextDay.get(nextDay.DATE)) {
-                        new File(PATH_FLASH_DRIVE  + formatDate + "/" + "3 " + schedule.get(i).getDirectionFlight() +
+                        new File(PATH_FLASH_DRIVE  + formatDate + "/" + "3" + schedule.get(i).getDirectionFlight() +
                                 " " + schedule.get(i).getNumberFlight()).mkdir();
                 } else {
                     new File(PATH_FLASH_DRIVE +
@@ -67,12 +68,13 @@ public class WriterFolder {
     }
 
     public static void createSchedule(List<Flight> schedule, String fileName) {
+        SimpleDateFormat pattern = new SimpleDateFormat("dd/ HH:mm");
         try {
             FileWriter writer = new FileWriter(PATH_FLASH_DRIVE + "/" + fileName);
             for (int i = 0; i < schedule.size(); i++) {
                     writer.write(" | " + schedule.get(i).getNumberFlight() +
                             " | " + schedule.get(i).getDirectionFlight()  +
-                            " | " + schedule.get(i).getTimeFlight().getTime());
+                            " | " + pattern.format(schedule.get(i).getTimeFlight().getTime()));
                     writer.write("\r" + "\n");
             }
             writer.close();
