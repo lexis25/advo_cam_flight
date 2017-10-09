@@ -8,7 +8,7 @@ import java.util.List;
 public class WriterFolder {
     private static final String PATH_FLASH_DRIVE = "h:/FOLDER/";
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         ParseSchedule tableDepartingToday = new ParseSchedule();
         ParseSchedule tableDepartingTomorrow = new ParseSchedule();
 
@@ -30,11 +30,13 @@ public class WriterFolder {
         departingToday.addAll(departingTomorrow);
         arrivalToday.addAll(arrivalTomorrow);
 
-        List<Flight> timeDeparting = Board.getTimeIntervalTable(7, 30, 02, 7, 30, 03, departingToday);
-        List<Flight> timeArrival = Board.getTimeIntervalTable(7, 30, 02, 7, 30, 03, arrivalToday);
+        List<Flight> timeDeparting = Board.getTimeIntervalTable(7, 30, 9, 7, 30, 10, departingToday);
+        List<Flight> timeArrival = Board.getTimeIntervalTable(7, 30, 9, 7, 30, 10, arrivalToday);
 
         Board.removeFlight(timeDeparting,"EY 8470");
         Board.removeFlight(timeArrival,"EY 8467");
+
+        new FlightScheduleExcel(timeArrival,timeDeparting);
 
         createSchedule(timeArrival,"прилет.txt");
         createSchedule(timeDeparting,"вылет.txt");
