@@ -14,7 +14,7 @@ public class ControlPanel {
 
         JButton createScheduleTXT = new JButton("create schedule");
         createScheduleTXT.setSize(100,50);
-        createScheduleTXT.addActionListener(new CreateSceduleTXTListener());
+        createScheduleTXT.addActionListener(new CreateScheduleTXTListener());
 
         frame.getContentPane().add(BorderLayout.EAST,createFolders);
         frame.getContentPane().add(BorderLayout.WEST,createScheduleTXT);
@@ -28,7 +28,7 @@ public class ControlPanel {
 
         }
     }
-    class CreateSceduleTXTListener implements ActionListener{
+    class CreateScheduleTXTListener implements ActionListener{
         public void actionPerformed(ActionEvent e) {
 
         }

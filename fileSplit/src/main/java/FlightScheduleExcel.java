@@ -60,7 +60,7 @@ public class FlightScheduleExcel {
 
         setHat(ARRIVAL, rowArrival, styleHat);
 
-        fillCell(arrivalList, true, ARRIVAL, rowArrival, arrivalSheet, styleContains, styleCenterCell);
+        fillCell(arrivalList, true, rowArrival, arrivalSheet, styleContains, styleCenterCell);
 
         Sheet departingSheet = book.createSheet("вылет");
 
@@ -73,7 +73,7 @@ public class FlightScheduleExcel {
 
         setHat(DEPARTING, rowDeparting, styleHat);
 
-        fillCell(departingList, false, DEPARTING, rowDeparting, departingSheet, styleContains, styleCenterCell);
+        fillCell(departingList, false, rowDeparting, departingSheet, styleContains, styleCenterCell);
 
         FileOutputStream fos = new FileOutputStream(PATH);
         book.write(fos);
@@ -103,55 +103,53 @@ public class FlightScheduleExcel {
         style.setBorderTop(BorderStyle.THIN);
     }
 
-    private static void fillCell(List<Flight> schedule, boolean arrivalOrDeparting, String[] ARRIVAL,
+    private static void fillCell(List<Flight> schedule, boolean arrivalOrDeparting,
                                  Row row, Sheet sheet, CellStyle styleOne, CellStyle styleTwo) {
         int counter = 1;
         for (int i = 0; i < schedule.size(); i++) {
-            for (int j = 0; j < ARRIVAL.length - 1; j++) {
-                row = sheet.createRow(counter);
-                row.setHeightInPoints(28);
-                if (arrivalOrDeparting) {
-                    Cell cell_zero = row.createCell(0);
-                    cell_zero.setCellStyle(styleOne);
-                    cell_zero.setCellValue(schedule.get(i).getNumberFlight());
+            row = sheet.createRow(counter);
+            row.setHeightInPoints(28);
+            if (arrivalOrDeparting) {
+                Cell cell_zero = row.createCell(0);
+                cell_zero.setCellStyle(styleOne);
+                cell_zero.setCellValue(schedule.get(i).getNumberFlight());
 
-                    Cell cell_one = row.createCell(1);
-                    cell_one.setCellStyle(styleOne);
-                    cell_one.setCellValue(schedule.get(i).getDirectionFlight());
+                Cell cell_one = row.createCell(1);
+                cell_one.setCellStyle(styleOne);
+                cell_one.setCellValue(schedule.get(i).getDirectionFlight());
 
-                    Cell cell_two = row.createCell(2);
-                    cell_two.setCellStyle(styleOne);
+                Cell cell_two = row.createCell(2);
+                cell_two.setCellStyle(styleOne);
 
-                    Cell cell_three = row.createCell(3);
-                    cell_three.setCellStyle(styleTwo);
-                    cell_three.setCellValue(String.valueOf(PATTERN.format(schedule.get(i).getTimeFlight().getTime())));
+                Cell cell_three = row.createCell(3);
+                cell_three.setCellStyle(styleTwo);
+                cell_three.setCellValue(String.valueOf(PATTERN.format(schedule.get(i).getTimeFlight().getTime())));
 
-                } else {
-                    Cell cell_zero = row.createCell(0);
-                    cell_zero.setCellStyle(styleOne);
-                    cell_zero.setCellValue(schedule.get(i).getNumberFlight());
+            } else {
+                Cell cell_zero = row.createCell(0);
+                cell_zero.setCellStyle(styleOne);
+                cell_zero.setCellValue(schedule.get(i).getNumberFlight());
 
-                    Cell cell_one = row.createCell(1);
-                    cell_one.setCellStyle(styleOne);
-                    cell_one.setCellValue(schedule.get(i).getDirectionFlight());
+                Cell cell_one = row.createCell(1);
+                cell_one.setCellStyle(styleOne);
+                cell_one.setCellValue(schedule.get(i).getDirectionFlight());
 
-                    Cell cell_two = row.createCell(2);
-                    cell_two.setCellStyle(styleOne);
+                Cell cell_two = row.createCell(2);
+                cell_two.setCellStyle(styleOne);
 
-                    Cell cell_three = row.createCell(3);
-                    cell_three.setCellStyle(styleOne);
+                Cell cell_three = row.createCell(3);
+                cell_three.setCellStyle(styleOne);
 
-                    Cell cell_four = row.createCell(4);
-                    cell_four.setCellStyle(styleTwo);
-                    cell_four.setCellValue(String.valueOf(PATTERN.format(schedule.get(i).getTimeFlight().getTime())));
+                Cell cell_four = row.createCell(4);
+                cell_four.setCellStyle(styleTwo);
+                cell_four.setCellValue(String.valueOf(PATTERN.format(schedule.get(i).getTimeFlight().getTime())));
 
-                    Cell cell_five  = row.createCell(5);
-                    cell_five.setCellStyle(styleOne);
+                Cell cell_five = row.createCell(5);
+                cell_five.setCellStyle(styleOne);
 
-                    Cell cell_six = row.createCell(6);
-                    cell_six.setCellStyle(styleOne);
+                Cell cell_six = row.createCell(6);
+                cell_six.setCellStyle(styleOne);
 
-                }
             }
             counter++;
         }
