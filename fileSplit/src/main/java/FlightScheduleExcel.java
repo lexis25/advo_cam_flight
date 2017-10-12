@@ -58,24 +58,9 @@ public class FlightScheduleExcel {
         Row rowArrival = arrivalSheet.createRow(0);
         rowArrival.setHeightInPoints(28);
 
-        setHat(ARRIVAL,rowArrival,styleHat);
+        setHat(ARRIVAL, rowArrival, styleHat);
 
-        int counter = 1;
-        for (int i = 0; i < arrivalList.size(); i++) {
-            rowArrival = arrivalSheet.createRow(counter);
-            rowArrival.setHeightInPoints(28);
-            Cell cell2 = rowArrival.createCell(0);
-            cell2.setCellStyle(styleContains);
-            cell2.setCellValue(arrivalList.get(i).getNumberFlight());
-            Cell cell3 = rowArrival.createCell(1);
-            cell3.setCellStyle(styleContains);
-            cell3.setCellValue(arrivalList.get(i).getDirectionFlight());
-            Cell cell4 = rowArrival.createCell(3);
-            cell4.setCellStyle(styleCenterCell);
-            cell4.setCellValue(String.valueOf(PATTERN.format(arrivalList.get(i).getTimeFlight().getTime())));
-            counter++;
-        }
-        counter = 1;
+        fillCell(arrivalList, true, ARRIVAL, rowArrival, arrivalSheet, styleContains, styleCenterCell);
 
         Sheet departingSheet = book.createSheet("вылет");
 
@@ -86,29 +71,16 @@ public class FlightScheduleExcel {
         Row rowDeparting = departingSheet.createRow(0);
         rowDeparting.setHeightInPoints(28);
 
-        setHat(DEPARTING,rowDeparting,styleHat);
+        setHat(DEPARTING, rowDeparting, styleHat);
 
-        for (int i = 0; i < departingList.size(); i++) {// ((( could be better
-            rowDeparting = departingSheet.createRow(counter);
-            rowDeparting.setHeightInPoints(28);
-            Cell cell2 = rowDeparting.createCell(0);
-            cell2.setCellStyle(styleContains);
-            cell2.setCellValue(departingList.get(i).getNumberFlight());
-            Cell cell3 = rowDeparting.createCell(1);
-            cell3.setCellStyle(styleContains);
-            cell3.setCellValue(departingList.get(i).getDirectionFlight());
-            Cell cell4 = rowDeparting.createCell(4);
-            cell4.setCellStyle(styleCenterCell);
-            cell4.setCellValue(String.valueOf(PATTERN.format(departingList.get(i).getTimeFlight().getTime())));
-            counter++;
-        }
+        fillCell(departingList, false, DEPARTING, rowDeparting, departingSheet, styleContains, styleCenterCell);
 
         FileOutputStream fos = new FileOutputStream(PATH);
         book.write(fos);
         fos.close();
     }
 
-    private static  void setHat(String [] arrivalOrDeparting, Row row, CellStyle style){
+    private static void setHat(String[] arrivalOrDeparting, Row row, CellStyle style) {
         for (int i = 0; i < arrivalOrDeparting.length; i++) {
             Cell cell = row.createCell(i);
             cell.setCellStyle(style);
@@ -124,11 +96,64 @@ public class FlightScheduleExcel {
         return font;
     }
 
-    private static void makeBorders(CellStyle style){
+    private static void makeBorders(CellStyle style) {
         style.setBorderBottom(BorderStyle.THIN);
         style.setBorderLeft(BorderStyle.THIN);
         style.setBorderRight(BorderStyle.THIN);
         style.setBorderTop(BorderStyle.THIN);
     }
 
+    private static void fillCell(List<Flight> schedule, boolean arrivalOrDeparting, String[] ARRIVAL,
+                                 Row row, Sheet sheet, CellStyle styleOne, CellStyle styleTwo) {
+        int counter = 1;
+        for (int i = 0; i < schedule.size(); i++) {
+            for (int j = 0; j < ARRIVAL.length - 1; j++) {
+                row = sheet.createRow(counter);
+                row.setHeightInPoints(28);
+                if (arrivalOrDeparting) {
+                    Cell cell_zero = row.createCell(0);
+                    cell_zero.setCellStyle(styleOne);
+                    cell_zero.setCellValue(schedule.get(i).getNumberFlight());
+
+                    Cell cell_one = row.createCell(1);
+                    cell_one.setCellStyle(styleOne);
+                    cell_one.setCellValue(schedule.get(i).getDirectionFlight());
+
+                    Cell cell_two = row.createCell(2);
+                    cell_two.setCellStyle(styleOne);
+
+                    Cell cell_three = row.createCell(3);
+                    cell_three.setCellStyle(styleTwo);
+                    cell_three.setCellValue(String.valueOf(PATTERN.format(schedule.get(i).getTimeFlight().getTime())));
+
+                } else {
+                    Cell cell_zero = row.createCell(0);
+                    cell_zero.setCellStyle(styleOne);
+                    cell_zero.setCellValue(schedule.get(i).getNumberFlight());
+
+                    Cell cell_one = row.createCell(1);
+                    cell_one.setCellStyle(styleOne);
+                    cell_one.setCellValue(schedule.get(i).getDirectionFlight());
+
+                    Cell cell_two = row.createCell(2);
+                    cell_two.setCellStyle(styleOne);
+
+                    Cell cell_three = row.createCell(3);
+                    cell_three.setCellStyle(styleOne);
+
+                    Cell cell_four = row.createCell(4);
+                    cell_four.setCellStyle(styleTwo);
+                    cell_four.setCellValue(String.valueOf(PATTERN.format(schedule.get(i).getTimeFlight().getTime())));
+
+                    Cell cell_five  = row.createCell(5);
+                    cell_five.setCellStyle(styleOne);
+
+                    Cell cell_six = row.createCell(6);
+                    cell_six.setCellStyle(styleOne);
+
+                }
+            }
+            counter++;
+        }
+    }
 }

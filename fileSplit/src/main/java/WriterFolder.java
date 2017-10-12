@@ -30,8 +30,8 @@ public class WriterFolder {
         departingToday.addAll(departingTomorrow);
         arrivalToday.addAll(arrivalTomorrow);
 
-        List<Flight> timeDeparting = Board.getTimeIntervalTable(7, 30, 9, 7, 30, 10, departingToday);
-        List<Flight> timeArrival = Board.getTimeIntervalTable(7, 30, 9, 7, 30, 10, arrivalToday);
+        List<Flight> timeDeparting = Board.getTimeIntervalTable(7, 30, 12, 7, 30, 13, departingToday);
+        List<Flight> timeArrival = Board.getTimeIntervalTable(7, 30, 12, 7, 30, 13, arrivalToday);
 
         Board.removeFlight(timeDeparting,"EY 8470");
         Board.removeFlight(timeArrival,"EY 8467");
@@ -83,5 +83,6 @@ public class WriterFolder {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+
     }
 }
