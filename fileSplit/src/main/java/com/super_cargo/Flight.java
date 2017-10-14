@@ -1,3 +1,5 @@
+package com.super_cargo;
+
 import java.util.Calendar;
 
 public class Flight {
@@ -6,23 +8,22 @@ public class Flight {
     private Calendar timeFlight = Calendar.getInstance();
     private String commentsFlight;
 
-    Flight(String numberF, String directionF, String timeF, String commentsF) {
-        this.numberFlight = numberF;
-        this.directionFlight = directionF;
-        this.commentsFlight = commentsF;
-        setTimeFlight(timeF);
-
-    }
-
     Flight() {
 
     }
 
-    public Flight(String numberF, String directionF, Calendar timeF, String commentsF) {
-        this.numberFlight = numberF;
-        this.directionFlight = directionF;
-        this.timeFlight = timeF;
-        this.commentsFlight = commentsF;
+    public Flight(String numberFlight, String directionFlight, String timeFlight, String commentsFlight) {
+        this.numberFlight = numberFlight;
+        this.directionFlight = directionFlight;
+        this.commentsFlight = commentsFlight;
+        setTimeFlight(timeFlight);
+    }
+
+    public Flight(String numberFlight, String directionFlight, Calendar timeFlight, String commentsFlight) {
+        this.numberFlight = numberFlight;
+        this.directionFlight = directionFlight;
+        this.timeFlight = timeFlight;
+        this.commentsFlight = commentsFlight;
     }
 
     public String toString(){
@@ -44,11 +45,9 @@ public class Flight {
         return timeFlight;
     }
 
-
     public String getCommentsFlight() {
         return commentsFlight;
     }
-
 
     public void setNumberFlight(String numberFlight) {
         this.numberFlight = numberFlight;
@@ -75,5 +74,4 @@ public class Flight {
     public void setCommentsFlight(String commentsFlight) {
         this.commentsFlight = commentsFlight;
     }
-
 }

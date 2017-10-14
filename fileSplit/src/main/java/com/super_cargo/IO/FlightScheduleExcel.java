@@ -1,3 +1,6 @@
+package com.super_cargo.IO;
+
+import com.super_cargo.Flight;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
 
@@ -17,7 +20,7 @@ public class FlightScheduleExcel {
     private static HSSFWorkbook book;
 
 
-    FlightScheduleExcel(List<Flight> arrival, List<Flight> departing) throws IOException {
+    public FlightScheduleExcel(List<Flight> arrival, List<Flight> departing) throws IOException {
         create(arrival, departing);
     }
 
