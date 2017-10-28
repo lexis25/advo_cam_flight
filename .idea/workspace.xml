@@ -2,9 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="56f88399-d70f-4e78-b28c-667611878692" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fileSplit/target/classes/WriterFolder.class" afterPath="$PROJECT_DIR$/fileSplit/target/classes/WriterFolder.class" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/fileSplit/.idea/kotlinc.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/fileSplit/.idea/uiDesigner.xml" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fileSplit/.idea/compiler.xml" afterPath="$PROJECT_DIR$/fileSplit/.idea/compiler.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fileSplit/.idea/misc.xml" afterPath="$PROJECT_DIR$/fileSplit/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fileSplit/.idea/modules.xml" afterPath="$PROJECT_DIR$/fileSplit/.idea/modules.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fileSplit/.idea/workspace.xml" afterPath="$PROJECT_DIR$/fileSplit/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fileSplit/src/main/java/WriterFolder.java" afterPath="$PROJECT_DIR$/fileSplit/src/main/java/WriterFolder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fileSplit/fileSplit.iml" afterPath="$PROJECT_DIR$/fileSplit/fileSplit.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fileSplit/src/main/java/com/super_cargo/IO/WriterFolder.java" afterPath="$PROJECT_DIR$/fileSplit/src/main/java/com/super_cargo/IO/WriterFolder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fileSplit/src/main/java/com/super_cargo/display/ControlPanel.java" afterPath="$PROJECT_DIR$/fileSplit/src/main/java/com/super_cargo/display/ControlPanel.java" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />

@@ -1,4 +1,4 @@
-package com.super_cargo.IO;
+package com.super_cargo.io;
 
 import com.super_cargo.Flight;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;

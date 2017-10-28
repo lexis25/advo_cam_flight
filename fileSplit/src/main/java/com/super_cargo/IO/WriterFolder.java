@@ -1,4 +1,4 @@
-package com.super_cargo.IO;
+package com.super_cargo.io;
 
 import com.super_cargo.Flight;
 import com.super_cargo.net.ParseSchedule;
@@ -15,44 +15,30 @@ public class WriterFolder {
     private static final String PATH_FLASH_DRIVE = "h:/FOLDER/";
 
     public static void main(String[] args) throws IOException {
-        ParseSchedule tableDepartingToday = new ParseSchedule();
-        ParseSchedule tableDepartingTomorrow = new ParseSchedule();
 
-        ParseSchedule tableArrivalToday = new ParseSchedule();
-        ParseSchedule tableArrivalTomorrow = new ParseSchedule();
+        ParseSchedule tableDeparting = new ParseSchedule();
+        ParseSchedule tableArrival = new ParseSchedule();
 
-        tableDepartingToday.setTable(new ParseSchedule().departing,new ParseSchedule().TODAY);
-        List<Flight> departingToday = tableDepartingToday.getTable();
+        tableDeparting.setTable(ParseSchedule.DEPARTING_ID_TAG);
+        List<Flight> departing = tableDeparting.getTable();
 
-        tableArrivalToday.setTable(new ParseSchedule().arrival,new ParseSchedule().TODAY);
-        List<Flight> arrivalToday = tableArrivalToday.getTable();
+        tableArrival.setTable(ParseSchedule.ARRIVAL_ID_TAG);
+        List<Flight> arrival = tableArrival.getTable();
 
-        tableDepartingTomorrow.setTable(new ParseSchedule().departing,new ParseSchedule().TOMORROW);
-        List<Flight> departingTomorrow = tableDepartingTomorrow.getTable();
+        List<Flight> timeDeparting = Board.getTimeIntervalTable(7, 30, 27, 7, 29, 29, departing);
+        List<Flight> timeArrival = Board.getTimeIntervalTable(7, 30, 27, 7, 29, 29, arrival);
 
-        tableArrivalTomorrow.setTable(new ParseSchedule().arrival,new ParseSchedule().TOMORROW);
-        List<Flight> arrivalTomorrow = tableArrivalTomorrow.getTable();
+        Board.removeFlight(timeDeparting, "EY 8470");
+        Board.removeFlight(timeArrival, "EY 8467");
 
-        departingToday.addAll(departingTomorrow);
-        arrivalToday.addAll(arrivalTomorrow);
+        new FlightScheduleExcel(timeArrival, timeDeparting);
 
-        List<Flight> timeDeparting = Board.getTimeIntervalTable(7, 30, 14, 7, 30, 15, departingToday);
-        List<Flight> timeArrival = Board.getTimeIntervalTable(7, 30, 14, 7, 30, 15, arrivalToday);
+        createSchedule(timeArrival, "прилет.txt");
+        createSchedule(timeDeparting, "вылет.txt");
 
-        Board.removeFlight(timeDeparting,"EY 8470");
-        Board.removeFlight(timeArrival,"EY 8467");
-
-        new FlightScheduleExcel(timeArrival,timeDeparting);
-
-        createSchedule(timeArrival,"прилет.txt");
-        createSchedule(timeDeparting,"вылет.txt");
-
-        List<Flight> couple = Board.getCouple(timeArrival,timeDeparting);
-        List<Flight> firstUnique = Board.getUnique(timeArrival,timeDeparting);
-        List<Flight> secondUnique = Board.getUnique(timeDeparting,timeArrival);
-        createFolders(couple);
-        createFolders(firstUnique);
-        createFolders(secondUnique);
+        createFolders(Board.getCouple(timeArrival, timeDeparting));
+        createFolders(Board.getUnique(timeArrival, timeDeparting));
+        createFolders(Board.getUnique(timeDeparting, timeArrival));
 
     }
 
@@ -64,14 +50,14 @@ public class WriterFolder {
         new File(PATH_FLASH_DRIVE + formatDate).mkdir();
 
         for (int i = 0; i < schedule.size(); i++) {
-                if (schedule.get(i).getTimeFlight().get(Calendar.DATE) == nextDay.get(nextDay.DATE)) {
-                        new File(PATH_FLASH_DRIVE  + formatDate + "/" + "3" + schedule.get(i).getDirectionFlight() +
-                                " " + schedule.get(i).getNumberFlight()).mkdir();
-                } else {
-                    new File(PATH_FLASH_DRIVE +
-                            "3" + schedule.get(i).getDirectionFlight() +
-                            " " + schedule.get(i).getNumberFlight()).mkdir();
-                }
+            if (schedule.get(i).getTimeFlight().get(Calendar.DATE) == nextDay.get(nextDay.DATE)) {
+                new File(PATH_FLASH_DRIVE + formatDate + "/" + "3" + schedule.get(i).getDirectionFlight() +
+                        " " + schedule.get(i).getNumberFlight()).mkdir();
+            } else {
+                new File(PATH_FLASH_DRIVE +
+                        "3" + schedule.get(i).getDirectionFlight() +
+                        " " + schedule.get(i).getNumberFlight()).mkdir();
+            }
         }
     }
 
@@ -80,10 +66,10 @@ public class WriterFolder {
         try {
             FileWriter writer = new FileWriter(PATH_FLASH_DRIVE + "/" + fileName);
             for (int i = 0; i < schedule.size(); i++) {
-                    writer.write(" | " + schedule.get(i).getNumberFlight() +
-                            " | " + schedule.get(i).getDirectionFlight()  +
-                            " | " + pattern.format(schedule.get(i).getTimeFlight().getTime()));
-                    writer.write("\r" + "\n");
+                writer.write(" | " + schedule.get(i).getNumberFlight() +
+                        " | " + schedule.get(i).getDirectionFlight() +
+                        " | " + pattern.format(schedule.get(i).getTimeFlight().getTime()));
+                writer.write("\r" + "\n");
             }
             writer.close();
         } catch (IOException ex) {

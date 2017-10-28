@@ -12,47 +12,43 @@ import java.util.List;
 
 public class ParseSchedule {
 
-    public final String departing = "table-departing";
-    public final String arrival = "table-arrival";
-
     private static final String CLASS_TD_HTML = "flight-item flight-";
 
-    public static final String YESTERDAY = "yesterday";
-    public static final String TODAY = "today";
-    public static final String TOMORROW = "tomorrow";
+    public static final String DEPARTING_ID_TAG = "table-departing";
+    public static final String ARRIVAL_ID_TAG = "table-arrival";
+
+    private final String [] DAY_ID_TAG = {"yesterday","today","tomorrow"};
 
     private List<Flight> table = new ArrayList<Flight>();
 
-    public void setTable(String arrivalOrDeparting, String classTag) {
+    public void setTable(String arrivalOrDeparting) {
         try {
             System.setProperty("javax.net.ssl.trustStore", "cer/11.jks");
             Document document = (Document) Jsoup.connect("https://hrk.aero/table/ajax_tablo_new.php?lang=ru&full=1&first=1").get();
             Element nameTable = document.getElementById(arrivalOrDeparting);
-            Elements tagTable = nameTable.getElementsByClass(CLASS_TD_HTML + classTag);
+            for (int i = 0; i < DAY_ID_TAG.length ; i++) {
+                Elements tagTable = nameTable.getElementsByClass(CLASS_TD_HTML + DAY_ID_TAG[i]);
+                parseSchedule(tagTable, DAY_ID_TAG [i]);
+            }
 
-            parseSchedule(tagTable,classTag);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
 
-    public List<Flight> getTable() {
-        return table;
-    }
-
     private void parseSchedule(Elements tableElements, String classTag) {
         Calendar calendar = Calendar.getInstance();
         String date = "";
-        if(classTag.equalsIgnoreCase(YESTERDAY)){
+        if(classTag.equalsIgnoreCase(DAY_ID_TAG[0])){
             calendar.roll(calendar.DATE,-1);
             date = String.format(" %02d.%02d.%02d", calendar.get(calendar.DATE)
                     , calendar.get(calendar.MONTH) + 1, calendar.get(calendar.YEAR));
 
-        }else if(classTag.equalsIgnoreCase(TODAY)){
+        }else if(classTag.equalsIgnoreCase(DAY_ID_TAG[1])){
             date = String.format(" %02d.%02d.%02d", calendar.get(calendar.DATE)
                     , calendar.get(calendar.MONTH) + 1, calendar.get(calendar.YEAR));
 
-        }else if(classTag.equalsIgnoreCase(TOMORROW)){
+        }else if(classTag.equalsIgnoreCase(DAY_ID_TAG[2])){
             calendar.add(calendar.DATE, 1);
             date = String.format(" %02d.%02d.%02d", calendar.get(calendar.DATE)
                     , calendar.get(calendar.MONTH) + 1, calendar.get(calendar.YEAR));
@@ -66,5 +62,9 @@ public class ParseSchedule {
                     tableElements.get(i).child(3).text()
             ));
         }
+    }
+
+    public List<Flight> getTable() {
+        return table;
     }
 }
