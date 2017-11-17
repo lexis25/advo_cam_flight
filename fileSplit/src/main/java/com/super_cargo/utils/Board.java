@@ -13,6 +13,7 @@ public abstract class Board {
     public static List<Flight> getTimeIntervalTable(int hourStart, int minuteStart, int dayStart,
                                                     int hourFinish, int minuteFinish, int dayEnd,
                                                     List<Flight> flight) {
+        canceledFlights(flight);
 
         Calendar present = Calendar.getInstance();
         Calendar future = Calendar.getInstance();
@@ -24,6 +25,14 @@ public abstract class Board {
         future.set(future.HOUR_OF_DAY, hourFinish);
         future.set(future.MINUTE, minuteFinish);
         future.set(future.DATE, dayEnd);
+
+        if(present.after(future)){
+            future.roll(future.MONTH,1);
+        }
+
+        if (present.after(future) && future.get(future.MONTH) == 11) {
+            future.roll(future.YEAR, 1);
+        }
 
         int[] interval = new int[2];
 
@@ -85,6 +94,7 @@ public abstract class Board {
         for (int i = 0; i < schedule.size(); i++) {
             if (schedule.get(i).getNumberFlight().equalsIgnoreCase(numberFlight)) {
                 schedule.remove(i);
+                i--;
             }
         }
     }
@@ -92,5 +102,14 @@ public abstract class Board {
     private static int getParseNumberFlight(String number) {
         String[] array = number.split(" ");
         return Integer.parseInt(array[array.length - 1]);
+    }
+
+    private static void canceledFlights(List<Flight> schedule) {
+        for (int i = 0; i < schedule.size(); i++) {
+            if(schedule.get(i).getCommentsFlight().equals("Отменен")){
+                schedule.remove(i);
+                i--;
+            }
+        }
     }
 }

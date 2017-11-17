@@ -25,9 +25,9 @@ public class WriterFolder {
         tableArrival.setTable(ParseSchedule.ARRIVAL_ID_TAG);
         List<Flight> arrival = tableArrival.getTable();
 
-        List<Flight> timeDeparting = Board.getTimeIntervalTable(7, 30, 27, 7, 29, 29, departing);
-        List<Flight> timeArrival = Board.getTimeIntervalTable(7, 30, 27, 7, 29, 29, arrival);
-
+        List<Flight> timeDeparting = Board.getTimeIntervalTable(7, 30, 16, 7, 30, 17, departing);
+        List<Flight> timeArrival = Board.getTimeIntervalTable(7, 30, 16, 7, 30, 17, arrival);
+        
         Board.removeFlight(timeDeparting, "EY 8470");
         Board.removeFlight(timeArrival, "EY 8467");
 
