@@ -6,16 +6,19 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
 
 public class ControlPanel extends Application {
 
 
     public void start(Stage primaryStage) throws Exception {
+        Shape shape = new Line();
 
         Pane pane = new Pane();
         pane.getChildren().addAll(createURLaddress());
@@ -59,6 +62,11 @@ public class ControlPanel extends Application {
         addressVBox.getChildren().addAll(def,newURL,textURL,line);
 
         Rectangle rectangleAddress = new Rectangle(89,138,Paint.valueOf("#0c59cf"));
+        //Image iconBag = new Image("res/shop.gif",false);// something wrong
+
+        StackPane rectangleIcon = new StackPane();
+        //rectangleIcon.getChildren().addAll(rectangleAddress,new ImageView(iconBag));
+
         HBox addressHBox = new HBox();
         addressHBox.getChildren().addAll(rectangleAddress,addressVBox);
 
