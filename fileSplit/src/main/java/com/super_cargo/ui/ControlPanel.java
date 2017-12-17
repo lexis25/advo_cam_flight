@@ -24,7 +24,7 @@ public class ControlPanel extends Application {
         pane.getChildren().add(createFiles());
         pane.getChildren().add(createButtons());
 
-        Scene scene = new Scene(pane, 500, 450);
+        Scene scene = new Scene(pane, 500, 550);
 
         primaryStage.setTitle("Airport VRParser");
         primaryStage.setScene(scene);
@@ -93,6 +93,7 @@ public class ControlPanel extends Application {
         ComboBox comboBoxBefore = new ComboBox();
         comboBoxBefore.getItems().addAll("yesterday", "today", "tomorrow");
 
+
         Rectangle rectangleDate = new Rectangle(89, 108, Paint.valueOf("#3d8af7"));
 
         dateFromVBox.getChildren().addAll(labelDate, from, before, comboBoxFrom);
@@ -106,7 +107,7 @@ public class ControlPanel extends Application {
     private static HBox createFiles(){
 
         VBox filesVBox = new VBox();
-        filesVBox.setPadding(new Insets(15));
+        filesVBox.setPadding(new Insets(25));
 
         ToggleGroup groupFiles = new ToggleGroup();
         RadioButton txt = new RadioButton();
@@ -129,18 +130,36 @@ public class ControlPanel extends Application {
 
     private static HBox createButtons(){
         HBox buttonHBox = new HBox(10);
+        VBox buttonVBox = new VBox();
+
         buttonHBox.setPadding(new Insets(25));
+        buttonVBox.setPadding(new Insets(25));
 
         Button cancel = new Button("cancel");
-
         Button start = new Button(" start ");
 
+        Label labelSaveFile = new Label("set default path directory");
+
+        ToggleGroup group = new ToggleGroup();
+        RadioButton saveDefPath = new RadioButton();
+        saveDefPath.setText("default");
+        saveDefPath.setPadding(new Insets(5));
+        saveDefPath.setSelected(true);
+        saveDefPath.setToggleGroup(group);
+
+        RadioButton saveNewPath = new RadioButton();
+        saveNewPath.setText("new path");
+        saveNewPath.setPadding(new Insets(5));
+        saveNewPath.setToggleGroup(group);
+
+
         buttonHBox.getChildren().addAll(cancel,start);
+        buttonVBox.getChildren().addAll(labelSaveFile,saveDefPath,saveNewPath,buttonHBox);
 
         Rectangle rectangleButtons = new Rectangle(89,48,Paint.valueOf("#a8c6fa"));
 
         HBox buttonsContainer = new HBox(0);
-        buttonsContainer.getChildren().addAll(rectangleButtons,buttonHBox);
+        buttonsContainer.getChildren().addAll(rectangleButtons,buttonVBox);
         return buttonsContainer;
     }
 
