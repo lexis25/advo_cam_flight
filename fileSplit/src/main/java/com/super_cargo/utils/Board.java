@@ -4,6 +4,7 @@ import com.super_cargo.Flight;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -26,8 +27,8 @@ public abstract class Board {
         future.set(future.MINUTE, minuteFinish);
         future.set(future.DATE, dayEnd);
 
-        if(present.after(future)){
-            future.roll(future.MONTH,1);
+        if (present.after(future)) {
+            future.roll(future.MONTH, 1);
         }
 
         if (present.after(future) && future.get(future.MONTH) == 11) {
@@ -106,10 +107,23 @@ public abstract class Board {
 
     private static void canceledFlights(List<Flight> schedule) {
         for (int i = 0; i < schedule.size(); i++) {
-            if(schedule.get(i).getCommentsFlight().equals("Отменен")){
+            if (schedule.get(i).getCommentsFlight().equals("Отменен")) {
                 schedule.remove(i);
                 i--;
             }
         }
+    }
+
+    private  List<Flight> getCoupleTwo(List<Flight> arrival, List<Flight> departing){
+        List<Flight> array = new ArrayList<Flight>();
+        Flight.NumberFlightCompare compareNumber = new Flight.NumberFlightCompare();
+        arrival.addAll(departing);
+        Collections.sort(arrival,compareNumber);
+        for (int i = 0; i < array.size() ; i++) {
+            if(Collections.binarySearch(arrival,arrival.get(i).getNumberFlight(),null) != -arrival.size()){
+
+            }
+        }
+        return null;
     }
 }

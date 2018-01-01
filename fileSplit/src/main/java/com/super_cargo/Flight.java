@@ -1,6 +1,7 @@
 package com.super_cargo;
 
 import java.util.Calendar;
+import java.util.Comparator;
 
 public class Flight {
     private String numberFlight;
@@ -73,5 +74,19 @@ public class Flight {
 
     public void setCommentsFlight(String commentsFlight) {
         this.commentsFlight = commentsFlight;
+    }
+
+    public static class NumberFlightCompare implements Comparator<Flight>{
+
+        public int compare(Flight o1, Flight o2) {
+            return o1.getNumberFlight().compareTo(o2.getNumberFlight());
+        }
+    }
+
+    public static class TimeFlightCompare implements Comparator<Flight>{
+
+        public int compare(Flight o1, Flight o2) {
+            return o1.getTimeFlight().compareTo(o2.getTimeFlight());
+        }
     }
 }
