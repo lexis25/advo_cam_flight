@@ -1,9 +1,8 @@
 package com.super_cargo;
 
 import java.util.Calendar;
-import java.util.Comparator;
 
-public class Flight {
+public class Flight  implements Comparable<Flight>{
     private String numberFlight;
     private String directionFlight;
     private Calendar timeFlight = Calendar.getInstance();
@@ -26,6 +25,7 @@ public class Flight {
         this.timeFlight = timeFlight;
         this.commentsFlight = commentsFlight;
     }
+
 
     public String toString(){
         return numberFlight + "\n" +
@@ -76,17 +76,7 @@ public class Flight {
         this.commentsFlight = commentsFlight;
     }
 
-    public static class NumberFlightCompare implements Comparator<Flight>{
-
-        public int compare(Flight o1, Flight o2) {
-            return o1.getNumberFlight().compareTo(o2.getNumberFlight());
-        }
-    }
-
-    public static class TimeFlightCompare implements Comparator<Flight>{
-
-        public int compare(Flight o1, Flight o2) {
-            return o1.getTimeFlight().compareTo(o2.getTimeFlight());
-        }
+    public int compareTo(Flight o) {
+        return numberFlight.compareTo(o.getNumberFlight());
     }
 }
