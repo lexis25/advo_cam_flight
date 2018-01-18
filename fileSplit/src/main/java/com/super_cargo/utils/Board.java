@@ -1,7 +1,5 @@
 package com.super_cargo.utils;
 
-import com.super_cargo.Flight;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -10,9 +8,9 @@ import java.util.List;
 
 public abstract class Board {
 
-    public static List<Flight> getTimeIntervalTable(int hourStart, int minuteStart, int dayStart,
-                                                    int hourFinish, int minuteFinish, int dayEnd,
-                                                    List<Flight> flight) {
+    public static List<Flight> getTimeInterval(int hourStart, int minuteStart, int dayStart,
+                                               int hourFinish, int minuteFinish, int dayEnd,
+                                               List<Flight> flight) {
         canceledFlights(flight);
 
         Calendar present = Calendar.getInstance();
@@ -49,48 +47,57 @@ public abstract class Board {
                 break;
             }
         }
+
         return flight.subList(interval[0], interval[1]);
     }
 
+    public static List<Flight> getCouple(List<Flight> arrival, List<Flight> departing) {
+        Collections.sort(arrival);
+        List<Flight> listCouple = new ArrayList<Flight>();
+        int result;
+        for (int i = 0; i < departing.size(); i++) {
 
-        public static List<Flight> getCouple(List<Flight> arrival, List<Flight> departing) {
-            List<Flight> array = new ArrayList<Flight>();
-            for (int i = 0; i < arrival.size(); i++) {
-                for (int j = 0; j < departing.size(); j++) {
-                    if (arrival.get(i).getTimeFlight().get(arrival.get(i).getTimeFlight().DATE) ==
-                            departing.get(j).getTimeFlight().get(departing.get(j).getTimeFlight().DATE)) {
-                        if (getParseNumberFlight(arrival.get(i).getNumberFlight(),true).equals(departing.get(j).getNumberFlight())
-                                || getParseNumberFlight(arrival.get(i).getNumberFlight(),false).equals(departing.get(j).getNumberFlight())) {
-                            array.add(new Flight(arrival.get(i).getNumberFlight() + " " + departing.get(j).getNumberFlight(),
-                                    arrival.get(i).getDirectionFlight(), arrival.get(i).getTimeFlight(), arrival.get(i).getCommentsFlight()));
-                        }
+            if ((result = Collections.binarySearch(arrival, new Flight((getParseNumberFlight(departing.get(i).getNumberFlight(), true)),
+                    departing.get(i).getDirectionFlight(), departing.get(i).getTimeFlight(), departing.get(i).getCommentsFlight()))) >= 0 &&
+                    arrival.get(result).getTimeFlight().DATE == departing.get(i).getTimeFlight().DATE) {
+                    listCouple.add(new Flight(arrival.get(result).getNumberFlight() + " " + departing.get(i).getNumberFlight(),
+                            arrival.get(result).getDirectionFlight(), arrival.get(result).getTimeFlight(), arrival.get(result).getCommentsFlight()));
+
+            } else if ((result = Collections.binarySearch(arrival, new Flight(getParseNumberFlight(departing.get(i).getNumberFlight(), false),
+                    departing.get(i).getDirectionFlight(), departing.get(i).getTimeFlight(), departing.get(i).getCommentsFlight()))) >= 0 &&
+                    arrival.get(result).getTimeFlight().DATE == departing.get(i).getTimeFlight().DATE) {
+                    listCouple.add(new Flight(arrival.get(result).getNumberFlight() + " " + departing.get(i).getNumberFlight(),
+                            arrival.get(result).getDirectionFlight(), arrival.get(result).getTimeFlight(), arrival.get(result).getCommentsFlight()));
+            } else {
+                listCouple.add(new Flight(departing.get(i).getNumberFlight(),departing.get(i).getDirectionFlight(),
+                        departing.get(i).getTimeFlight(),departing.get(i).getCommentsFlight()));
+
+            }
+        }
+
+        return listCouple;
+    }
+
+    public static List<Flight> getUnique(List<Flight> arrival, List<Flight> departing) {
+        List<Flight> array = new ArrayList<Flight>();
+        int coin = 0;
+        for (int i = 0; i < arrival.size(); i++) {
+            for (int j = 0; j < departing.size(); j++) {
+                if (arrival.get(i).getTimeFlight().get(arrival.get(i).getTimeFlight().DATE) ==
+                        departing.get(j).getTimeFlight().get(departing.get(j).getTimeFlight().DATE)) {
+                    if (getParseNumberFlight(arrival.get(i).getNumberFlight(), true).equals(departing.get(j).getNumberFlight())
+                            || getParseNumberFlight(arrival.get(i).getNumberFlight(), false).equals(departing.get(j).getNumberFlight())) {
+                        coin++;
                     }
                 }
             }
-            return array;
-        }
-
-
-        public static List<Flight> getUnique(List<Flight> arrival, List<Flight> departing) {
-            List<Flight> array = new ArrayList<Flight>();
-            int coin = 0;
-            for (int i = 0; i < arrival.size(); i++) {
-                for (int j = 0; j < departing.size(); j++) {
-                    if (arrival.get(i).getTimeFlight().get(arrival.get(i).getTimeFlight().DATE) ==
-                            departing.get(j).getTimeFlight().get(departing.get(j).getTimeFlight().DATE)) {
-                        if (getParseNumberFlight(arrival.get(i).getNumberFlight(),true).equals(departing.get(j).getNumberFlight())
-                                || getParseNumberFlight(arrival.get(i).getNumberFlight(),false).equals(departing.get(j).getNumberFlight())) {
-                            coin++;
-                        }
-                    }
-                }
-                if (coin == 0) {
-                    array.add(arrival.get(i));
-                }
-                coin = 0;
+            if (coin == 0) {
+                array.add(arrival.get(i));
             }
-            return array;
+            coin = 0;
         }
+        return array;
+    }
 
     public static void removeFlight(List<Flight> schedule, String numberFlight) {
         for (int i = 0; i < schedule.size(); i++) {
@@ -105,16 +112,20 @@ public abstract class Board {
         String[] array = number.split(" ");
         int result;
         String newString = null;
-        if (positive) {
-            result = Integer.parseInt(array[array.length - 1]) + 1;
-        } else {
-            result = Integer.parseInt(array[array.length - 1]) - 1;
-        }
+        if(array.length == 2) {
+            if (positive) {
+                result = Integer.parseInt(array[array.length - 1]) + 1;
+            } else {
+                result = Integer.parseInt(array[array.length - 1]) - 1;
+            }
 
-        if ((array[0] + " " + String.valueOf(result)).length() == number.length()) {
-            newString = array[0] + " " + String.valueOf(result);
-        } else {
-            newString = array[0] + " 0" + String.valueOf(result);
+            if ((array[0] + " " + String.valueOf(result)).length() == number.length()) {
+                newString = array[0] + " " + String.valueOf(result);
+            } else {
+                newString = array[0] + " 0" + String.valueOf(result);
+            }
+        }else{
+            newString = "-1";
         }
 
         return newString;
@@ -128,28 +139,6 @@ public abstract class Board {
             }
         }
 
-    }
-
-    private List<Flight> getCoupleTwo(List<Flight> arrival, List<Flight> departing) {
-        Collections.sort(arrival);
-        List<Flight> listCouple = new ArrayList<Flight>();
-        int result;
-        for (int i = 0; i < departing.size(); i++) {
-            if ((result = Collections.binarySearch(arrival, new Flight(getParseNumberFlight(departing.get(i).getNumberFlight(), true),
-                    null, (String) null, null))) != -1) {
-                listCouple.add(new Flight(arrival.get(result).getNumberFlight() + departing.get(i).getNumberFlight(),
-                        arrival.get(result).getDirectionFlight(), arrival.get(result).getTimeFlight(), null));
-            }
-
-            if((result = Collections.binarySearch(arrival, new Flight(getParseNumberFlight(departing.get(i).getNumberFlight(), false),
-                    null, (String) null, null))) != -1){
-                listCouple.add(new Flight(arrival.get(result).getNumberFlight() + departing.get(i).getNumberFlight(),
-                        arrival.get(result).getDirectionFlight(),arrival.get(result).getTimeFlight(),null));
-            }
-
-        }
-
-        return listCouple;
     }
 
 }
