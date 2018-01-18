@@ -1,6 +1,6 @@
 package com.super_cargo.net;
 
-import com.super_cargo.Flight;
+import com.super_cargo.utils.Flight;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;

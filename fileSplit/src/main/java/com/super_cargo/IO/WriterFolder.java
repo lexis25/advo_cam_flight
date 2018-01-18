@@ -1,6 +1,6 @@
 package com.super_cargo.IO;
 
-import com.super_cargo.Flight;
+import com.super_cargo.utils.Flight;
 import com.super_cargo.net.ParseSchedule;
 import com.super_cargo.utils.Board;
 
@@ -25,8 +25,8 @@ public class WriterFolder {
         tableArrival.setTable(ParseSchedule.ARRIVAL_ID_TAG);
         List<Flight> arrival = tableArrival.getTable();
 
-        List<Flight> timeDeparting = Board.getTimeIntervalTable(7, 30, 8, 7, 30, 9, departing);
-        List<Flight> timeArrival = Board.getTimeIntervalTable(7, 30, 8, 7, 30, 9, arrival);
+        List<Flight> timeDeparting = Board.getTimeInterval(7, 30, 17, 7, 30, 18, departing);
+        List<Flight> timeArrival = Board.getTimeInterval(7, 30, 17, 7, 30, 18, arrival);
         
         Board.removeFlight(timeDeparting, "EY 8470");
         Board.removeFlight(timeArrival, "EY 8467");
@@ -38,8 +38,6 @@ public class WriterFolder {
 
         createFolders(Board.getCouple(timeArrival, timeDeparting));
         createFolders(Board.getUnique(timeArrival, timeDeparting));
-        createFolders(Board.getUnique(timeDeparting, timeArrival));
-
 
     }
 
