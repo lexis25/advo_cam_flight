@@ -1,5 +1,7 @@
 package com.super_cargo.utils;
 
+import com.super_cargo.utils.Flight.CommentsCompare;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -60,18 +62,14 @@ public abstract class Board {
             if ((result = Collections.binarySearch(arrival, new Flight((getParseNumberFlight(departing.get(i).getNumberFlight(), true)),
                     departing.get(i).getDirectionFlight(), departing.get(i).getTimeFlight(), departing.get(i).getCommentsFlight()))) >= 0 &&
                     arrival.get(result).getTimeFlight().DATE == departing.get(i).getTimeFlight().DATE) {
-                    listCouple.add(new Flight(arrival.get(result).getNumberFlight() + " " + departing.get(i).getNumberFlight(),
-                            arrival.get(result).getDirectionFlight(), arrival.get(result).getTimeFlight(), arrival.get(result).getCommentsFlight()));
+                listCouple.add(new Flight(arrival.get(result).getNumberFlight() + " " + departing.get(i).getNumberFlight(),
+                        arrival.get(result).getDirectionFlight(), arrival.get(result).getTimeFlight(), arrival.get(result).getCommentsFlight()));
 
             } else if ((result = Collections.binarySearch(arrival, new Flight(getParseNumberFlight(departing.get(i).getNumberFlight(), false),
                     departing.get(i).getDirectionFlight(), departing.get(i).getTimeFlight(), departing.get(i).getCommentsFlight()))) >= 0 &&
                     arrival.get(result).getTimeFlight().DATE == departing.get(i).getTimeFlight().DATE) {
-                    listCouple.add(new Flight(arrival.get(result).getNumberFlight() + " " + departing.get(i).getNumberFlight(),
-                            arrival.get(result).getDirectionFlight(), arrival.get(result).getTimeFlight(), arrival.get(result).getCommentsFlight()));
-            } else {
-                listCouple.add(new Flight(departing.get(i).getNumberFlight(),departing.get(i).getDirectionFlight(),
-                        departing.get(i).getTimeFlight(),departing.get(i).getCommentsFlight()));
-
+                listCouple.add(new Flight(arrival.get(result).getNumberFlight() + " " + departing.get(i).getNumberFlight(),
+                        arrival.get(result).getDirectionFlight(), arrival.get(result).getTimeFlight(), arrival.get(result).getCommentsFlight()));
             }
         }
 
@@ -100,19 +98,20 @@ public abstract class Board {
     }
 
     public static void removeFlight(List<Flight> schedule, String numberFlight) {
-        for (int i = 0; i < schedule.size(); i++) {
-            if (schedule.get(i).getNumberFlight().equalsIgnoreCase(numberFlight)) {
-                schedule.remove(i);
-                i--;
-            }
+        Collections.sort(schedule);
+        int result;
+        if ((result = Collections.binarySearch(schedule, new Flight(numberFlight, "", "", ""))) >= 0) {
+            schedule.remove(result);
         }
+
+//        Collections.sort(result, new Flight.TimeCompare()); after each operation binary search need sort in time
     }
 
     private static String getParseNumberFlight(String number, boolean positive) {
         String[] array = number.split(" ");
         int result;
-        String newString = null;
-        if(array.length == 2) {
+        String newString;
+        if (array.length == 2) {
             if (positive) {
                 result = Integer.parseInt(array[array.length - 1]) + 1;
             } else {
@@ -124,7 +123,7 @@ public abstract class Board {
             } else {
                 newString = array[0] + " 0" + String.valueOf(result);
             }
-        }else{
+        } else {
             newString = "-1";
         }
 
@@ -132,13 +131,13 @@ public abstract class Board {
     }
 
     private static void canceledFlights(List<Flight> schedule) {
-        for (int i = 0; i < schedule.size(); i++) {
-            if (schedule.get(i).getCommentsFlight().equals("Отменен")) {
-                schedule.remove(i);
-                i--;
-            }
+        CommentsCompare compare = new CommentsCompare();
+        Collections.sort(schedule, compare);
+        int result;
+        while ((result = Collections.binarySearch(schedule,
+                new Flight("", "", "", "Отменен"), compare)) >= 0) {
+            schedule.remove(result);
         }
-
     }
 
 }

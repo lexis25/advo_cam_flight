@@ -1,8 +1,6 @@
 package com.super_cargo.IO;
 
 import com.super_cargo.utils.Flight;
-import com.super_cargo.net.ParseSchedule;
-import com.super_cargo.utils.Board;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -13,33 +11,6 @@ import java.util.List;
 
 public class WriterFolder {
     private static final String PATH_FLASH_DRIVE = "h:/FOLDER/";
-
-    public static void main(String[] args) throws IOException {
-
-        ParseSchedule tableDeparting = new ParseSchedule();
-        ParseSchedule tableArrival = new ParseSchedule();
-
-        tableDeparting.setTable(ParseSchedule.DEPARTING_ID_TAG);
-        List<Flight> departing = tableDeparting.getTable();
-
-        tableArrival.setTable(ParseSchedule.ARRIVAL_ID_TAG);
-        List<Flight> arrival = tableArrival.getTable();
-
-        List<Flight> timeDeparting = Board.getTimeInterval(7, 30, 17, 7, 30, 18, departing);
-        List<Flight> timeArrival = Board.getTimeInterval(7, 30, 17, 7, 30, 18, arrival);
-        
-        Board.removeFlight(timeDeparting, "EY 8470");
-        Board.removeFlight(timeArrival, "EY 8467");
-
-        new FlightScheduleExcel(timeArrival, timeDeparting);
-
-        createSchedule(timeArrival, "прилет.txt");
-        createSchedule(timeDeparting, "вылет.txt");
-
-        createFolders(Board.getCouple(timeArrival, timeDeparting));
-        createFolders(Board.getUnique(timeArrival, timeDeparting));
-
-    }
 
     public static void createFolders(List<Flight> schedule) {
         Calendar nextDay = Calendar.getInstance();

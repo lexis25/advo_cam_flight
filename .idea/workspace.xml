@@ -3,11 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="56f88399-d70f-4e78-b28c-667611878692" name="Default" comment="">
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fileSplit/.idea/vcs.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fileSplit/src/main/java/com/super_cargo/main/Main.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fileSplit/.idea/workspace.xml" afterPath="$PROJECT_DIR$/fileSplit/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fileSplit/fileSplit.iml" afterPath="$PROJECT_DIR$/fileSplit/fileSplit.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fileSplit/src/main/java/com/super_cargo/IO/FlightScheduleExcel.java" afterPath="$PROJECT_DIR$/fileSplit/src/main/java/com/super_cargo/IO/FlightScheduleExcel.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fileSplit/src/main/java/com/super_cargo/IO/WriterFolder.java" afterPath="$PROJECT_DIR$/fileSplit/src/main/java/com/super_cargo/IO/WriterFolder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fileSplit/src/main/java/com/super_cargo/ui/ControlPanel.java" afterPath="$PROJECT_DIR$/fileSplit/src/main/java/com/super_cargo/ui/ControlPanel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fileSplit/src/main/java/com/super_cargo/utils/Board.java" afterPath="$PROJECT_DIR$/fileSplit/src/main/java/com/super_cargo/utils/Board.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fileSplit/src/main/java/com/super_cargo/utils/Flight.java" afterPath="$PROJECT_DIR$/fileSplit/src/main/java/com/super_cargo/utils/Flight.java" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -49,7 +51,7 @@
     <panes />
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../lessons/Java/Solution" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/fileSplit" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
