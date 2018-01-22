@@ -13,7 +13,7 @@ public abstract class Board {
     public static List<Flight> getTimeInterval(int hourStart, int minuteStart, int dayStart,
                                                int hourFinish, int minuteFinish, int dayEnd,
                                                List<Flight> flight) {
-        canceledFlights(flight);
+
 
         Calendar present = Calendar.getInstance();
         Calendar future = Calendar.getInstance();
@@ -61,17 +61,18 @@ public abstract class Board {
 
             if ((result = Collections.binarySearch(arrival, new Flight((getParseNumberFlight(departing.get(i).getNumberFlight(), true)),
                     departing.get(i).getDirectionFlight(), departing.get(i).getTimeFlight(), departing.get(i).getCommentsFlight()))) >= 0 &&
-                    arrival.get(result).getTimeFlight().DATE == departing.get(i).getTimeFlight().DATE) {
+                    arrival.get(result).getTimeFlight().get(Calendar.DATE) == departing.get(i).getTimeFlight().get(Calendar.DATE)) {
                 listCouple.add(new Flight(arrival.get(result).getNumberFlight() + " " + departing.get(i).getNumberFlight(),
                         arrival.get(result).getDirectionFlight(), arrival.get(result).getTimeFlight(), arrival.get(result).getCommentsFlight()));
 
             } else if ((result = Collections.binarySearch(arrival, new Flight(getParseNumberFlight(departing.get(i).getNumberFlight(), false),
                     departing.get(i).getDirectionFlight(), departing.get(i).getTimeFlight(), departing.get(i).getCommentsFlight()))) >= 0 &&
-                    arrival.get(result).getTimeFlight().DATE == departing.get(i).getTimeFlight().DATE) {
+                    arrival.get(result).getTimeFlight().get(Calendar.DATE) == departing.get(i).getTimeFlight().get(Calendar.DATE)) {
                 listCouple.add(new Flight(arrival.get(result).getNumberFlight() + " " + departing.get(i).getNumberFlight(),
                         arrival.get(result).getDirectionFlight(), arrival.get(result).getTimeFlight(), arrival.get(result).getCommentsFlight()));
             }
         }
+        Collections.sort(listCouple, new Flight.TimeCompare());
 
         return listCouple;
     }
@@ -81,8 +82,7 @@ public abstract class Board {
         int coin = 0;
         for (int i = 0; i < arrival.size(); i++) {
             for (int j = 0; j < departing.size(); j++) {
-                if (arrival.get(i).getTimeFlight().get(arrival.get(i).getTimeFlight().DATE) ==
-                        departing.get(j).getTimeFlight().get(departing.get(j).getTimeFlight().DATE)) {
+                if (arrival.get(i).getTimeFlight().get(Calendar.DATE) == departing.get(j).getTimeFlight().get(Calendar.DATE)) {
                     if (getParseNumberFlight(arrival.get(i).getNumberFlight(), true).equals(departing.get(j).getNumberFlight())
                             || getParseNumberFlight(arrival.get(i).getNumberFlight(), false).equals(departing.get(j).getNumberFlight())) {
                         coin++;
@@ -94,6 +94,7 @@ public abstract class Board {
             }
             coin = 0;
         }
+        Collections.sort(array, new Flight.TimeCompare());
         return array;
     }
 
@@ -103,8 +104,8 @@ public abstract class Board {
         if ((result = Collections.binarySearch(schedule, new Flight(numberFlight, "", "", ""))) >= 0) {
             schedule.remove(result);
         }
+        Collections.sort(schedule, new Flight.TimeCompare());
 
-//        Collections.sort(result, new Flight.TimeCompare()); after each operation binary search need sort in time
     }
 
     private static String getParseNumberFlight(String number, boolean positive) {
@@ -130,7 +131,7 @@ public abstract class Board {
         return newString;
     }
 
-    private static void canceledFlights(List<Flight> schedule) {
+    public static void canceledFlights(List<Flight> schedule) {
         CommentsCompare compare = new CommentsCompare();
         Collections.sort(schedule, compare);
         int result;
@@ -138,6 +139,7 @@ public abstract class Board {
                 new Flight("", "", "", "Отменен"), compare)) >= 0) {
             schedule.remove(result);
         }
+        Collections.sort(schedule, new Flight.TimeCompare());
     }
 
 }
