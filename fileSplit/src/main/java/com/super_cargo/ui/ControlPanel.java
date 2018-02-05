@@ -20,7 +20,6 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -214,7 +213,7 @@ public class ControlPanel extends Application {
                 public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
                     if (groupFiles.getSelectedToggle().getUserData().equals("Create txt file schedule")) {
                         txtFile = true;
-                    }else if (groupFiles.getSelectedToggle().getUserData().equals("Create excel file schedule")) {
+                    } else if (groupFiles.getSelectedToggle().getUserData().equals("Create excel file schedule")) {
                         excelFile = true;
                     }
                 }
@@ -235,37 +234,29 @@ public class ControlPanel extends Application {
                         Calendar past = Calendar.getInstance();
                         Calendar future = Calendar.getInstance();
 
-                        List<Flight> timeArrival = new ArrayList<Flight>();
-                        List<Flight> timeDeparting = new ArrayList<Flight>();
-                        if (from != null && before != null) {
-                            int datePast = 0;
-                            int dateFuture = 0;
-                            if (from.equals("yesterday") && before.equals("today")) {
-                                past.roll((past.DATE), -1);
-                                datePast = past.get(past.DATE);
-                                dateFuture = future.get(future.DATE);
-                            } else if (from.equals("today") && before.equals("tomorrow")) {
-                                datePast = past.get(past.DATE);
-                                future.roll((future.DATE), 1);
-                                dateFuture = future.get(future.DATE);
-                            } else if (from.equals("yesterday") && before.equals("tomorrow")) {
-                                past.roll((past.DATE), -1);
-                                future.roll((future.DATE), 1);
-                                datePast = past.get(past.DATE);
-                                dateFuture = future.get(future.DATE);
-                            }
-                            System.out.println(datePast + "? " + dateFuture);
-
-
-                            timeDeparting = Board.getTimeInterval(7, 30, datePast, 7, 30, dateFuture, departing);
-                            timeArrival = Board.getTimeInterval(7, 30, datePast, 7, 30, dateFuture, arrival);
-                            Board.removeFlight(timeDeparting, "EY 8470");
-                            Board.removeFlight(timeArrival, "EY 8467");
-                            for (int i = 0; i < timeArrival.size(); i++) {
-                                System.out.println(timeArrival.get(i).toString());
-                            }
-
+                        int datePast = 0;
+                        int dateFuture = 0;
+                        if (from.equals("yesterday") && before.equals("today")) {
+                            past.roll((past.DATE), -1);
+                            datePast = past.get(past.DATE);
+                            dateFuture = future.get(future.DATE);
+                        } else if (from.equals("today") && before.equals("tomorrow")) {
+                            datePast = past.get(past.DATE);
+                            future.roll((future.DATE), 1);
+                            dateFuture = future.get(future.DATE);
+                        } else if (from.equals("yesterday") && before.equals("tomorrow")) {
+                            past.roll((past.DATE), -1);
+                            future.roll((future.DATE), 1);
+                            datePast = past.get(past.DATE);
+                            dateFuture = future.get(future.DATE);
                         }
+
+                        List<Flight> timeDeparting = Board.getTimeInterval(7, 30, datePast, 7, 30, dateFuture, departing);
+                        List<Flight> timeArrival = Board.getTimeInterval(7, 30, datePast, 7, 30, dateFuture, arrival);
+                        Board.canceledFlights(timeDeparting);
+                        Board.canceledFlights(timeArrival);
+                        Board.removeFlight(timeDeparting, "EY 8470");
+                        Board.removeFlight(timeArrival, "EY 8467");
 
                         if (txtFile) {
                             WriterFolder.createSchedule(timeArrival, "прилет.txt");

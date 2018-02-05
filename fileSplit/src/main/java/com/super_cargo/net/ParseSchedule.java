@@ -8,6 +8,7 @@ import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 
 public class ParseSchedule {
@@ -17,18 +18,36 @@ public class ParseSchedule {
     public static final String DEPARTING_ID_TAG = "table-departing";
     public static final String ARRIVAL_ID_TAG = "table-arrival";
 
-    private final String [] DAY_ID_TAG = {"yesterday","today","tomorrow"};
+    private final String[] DAY_ID_TAG = {"yesterday", "today", "tomorrow"};
+    private HashMap<String, Calendar> day = new HashMap<String, Calendar>();
 
     private List<Flight> table = new ArrayList<Flight>();
+
+    public ParseSchedule() {
+        setInitialDay();
+    }
+
+    private void setInitialDay() {
+        Calendar yesterday = Calendar.getInstance();
+        yesterday.roll(Calendar.DATE, -1);
+        Calendar today = Calendar.getInstance();
+        Calendar tomorrow = Calendar.getInstance();
+        tomorrow.roll(Calendar.DATE, 1);
+        day.put(DAY_ID_TAG[0], yesterday);
+        day.put(DAY_ID_TAG[1], today);
+        day.put(DAY_ID_TAG[2], tomorrow);
+
+    }
+
 
     public void setTable(String arrivalOrDeparting) {
         try {
             System.setProperty("javax.net.ssl.trustStore", "cer/11.jks");
             Document document = (Document) Jsoup.connect("https://hrk.aero/table/ajax_tablo_new.php?lang=ru&full=1&first=1").get();
             Element nameTable = document.getElementById(arrivalOrDeparting);
-            for (int i = 0; i < DAY_ID_TAG.length ; i++) {
+            for (int i = 0; i < DAY_ID_TAG.length; i++) {
                 Elements tagTable = nameTable.getElementsByClass(CLASS_TD_HTML + DAY_ID_TAG[i]);
-                parseSchedule(tagTable, DAY_ID_TAG [i]);
+                getParse(tagTable, DAY_ID_TAG[i]);
             }
 
         } catch (Exception ex) {
@@ -36,22 +55,11 @@ public class ParseSchedule {
         }
     }
 
-    private void parseSchedule(Elements tableElements, String classTag) {
-        Calendar calendar = Calendar.getInstance();
+    private void getParse(Elements tableElements, String classTag) {
         String date = "";
-        if(classTag.equalsIgnoreCase(DAY_ID_TAG[0])){
-            calendar.roll(calendar.DATE,-1);
-            date = String.format(" %02d.%02d.%02d", calendar.get(calendar.DATE)
-                    , calendar.get(calendar.MONTH) + 1, calendar.get(calendar.YEAR));
-
-        }else if(classTag.equalsIgnoreCase(DAY_ID_TAG[1])){
-            date = String.format(" %02d.%02d.%02d", calendar.get(calendar.DATE)
-                    , calendar.get(calendar.MONTH) + 1, calendar.get(calendar.YEAR));
-
-        }else if(classTag.equalsIgnoreCase(DAY_ID_TAG[2])){
-            calendar.add(calendar.DATE, 1);
-            date = String.format(" %02d.%02d.%02d", calendar.get(calendar.DATE)
-                    , calendar.get(calendar.MONTH) + 1, calendar.get(calendar.YEAR));
+        if (day.containsKey(classTag)) {
+            date = String.format(" %02d.%02d.%02d", day.get(classTag).get(Calendar.DATE),
+                    day.get(classTag).get(Calendar.MONTH) + 1, day.get(classTag).get(Calendar.YEAR));
         }
 
         for (int i = 0; i < tableElements.size(); i++) {
