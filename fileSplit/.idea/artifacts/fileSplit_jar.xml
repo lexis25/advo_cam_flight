@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="fileSplit:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/fileSplit_jar</output-path>
+    <root id="archive" name="fileSplit.jar">
+      <element id="module-output" name="fileSplit" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/poi-3.17.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/jsoup-1.10.2.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

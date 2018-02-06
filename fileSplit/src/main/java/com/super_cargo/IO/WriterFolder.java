@@ -11,21 +11,39 @@ import java.util.List;
 
 public class WriterFolder {
     private static final String PATH_FLASH_DRIVE = "h:/FOLDER/";
+    private static final Calendar flag = Calendar.getInstance();
 
     public static void createFolders(List<Flight> schedule) {
-        Calendar nextDay = Calendar.getInstance();
-        nextDay.add(nextDay.DATE, 1);
-        String formatDate = String.format("%02d.%02d.%02d", nextDay.get(nextDay.DATE)
-                , nextDay.get(nextDay.MONTH) + 1, nextDay.get(nextDay.YEAR));
-        new File(PATH_FLASH_DRIVE + formatDate).mkdir();
+        String past = null;
+        String future = null;
+
+        if (schedule.get(0).getTimeFlight().get(Calendar.DATE) < flag.get(Calendar.DATE)) {
+            past = String.format("%02d.%02d.%02d", schedule.get(0).getTimeFlight().get(Calendar.DATE),
+                    schedule.get(0).getTimeFlight().get(Calendar.MONTH) + 1,
+                    schedule.get(0).getTimeFlight().get(Calendar.YEAR));
+            new File(PATH_FLASH_DRIVE + past).mkdir();
+
+        }
+
+        if (schedule.get(schedule.size() - 1).getTimeFlight().get(Calendar.DATE) > flag.get(Calendar.DATE)) {
+            future = String.format("%02d.%02d.%02d", schedule.get(schedule.size() - 1).getTimeFlight().get(Calendar.DATE),
+                    schedule.get(schedule.size() - 1).getTimeFlight().get(Calendar.MONTH) + 1,
+                    schedule.get(schedule.size() - 1).getTimeFlight().get(Calendar.YEAR));
+            new File(PATH_FLASH_DRIVE + future).mkdir();
+        }
 
         for (int i = 0; i < schedule.size(); i++) {
-            if (schedule.get(i).getTimeFlight().get(Calendar.DATE) == nextDay.get(nextDay.DATE)) {
-                new File(PATH_FLASH_DRIVE + formatDate + "/" + "3" + schedule.get(i).getDirectionFlight() +
+            if (schedule.get(i).getTimeFlight().get(Calendar.DATE) < flag.get(Calendar.DATE)) {
+                new File(PATH_FLASH_DRIVE + past + "/" + "3" + schedule.get(i).getDirectionFlight() +
                         " " + schedule.get(i).getNumberFlight()).mkdir();
-            } else {
-                new File(PATH_FLASH_DRIVE +
-                        "3" + schedule.get(i).getDirectionFlight() +
+            }
+            if (schedule.get(i).getTimeFlight().get(Calendar.DATE) > flag.get(Calendar.DATE)) {
+                new File(PATH_FLASH_DRIVE + future + "/" + "3" + schedule.get(i).getDirectionFlight() +
+                        " " + schedule.get(i).getNumberFlight()).mkdir();
+            }
+            if (schedule.get(i).getTimeFlight().get(Calendar.DATE) == flag.get(Calendar.DATE)) {
+
+                new File(PATH_FLASH_DRIVE + "3" + schedule.get(i).getDirectionFlight() +
                         " " + schedule.get(i).getNumberFlight()).mkdir();
             }
         }
