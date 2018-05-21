@@ -14,14 +14,15 @@ import java.util.List;
 public class ParseSchedule {
 
     private static final String CLASS_TD_HTML = "flight-item flight-";
-
     public static final String DEPARTING_ID_TAG = "table-departing";
     public static final String ARRIVAL_ID_TAG = "table-arrival";
+    public static final String PATH = "https://hrk.aero/table/ajax_tablo_new.php?lang=ru&full=1&first=1";
 
     private final String[] DAY_ID_TAG = {"yesterday", "today", "tomorrow"};
     private HashMap<String, Calendar> day = new HashMap<String, Calendar>();
 
-    private List<Flight> table = new ArrayList<Flight>();
+    private List<Flight> tableArrival = new ArrayList<Flight>();
+    private List<Flight> tableDeparting = new ArrayList<Flight>();
 
     public ParseSchedule() {
         setInitialDay();
@@ -36,43 +37,58 @@ public class ParseSchedule {
         day.put(DAY_ID_TAG[0], yesterday);
         day.put(DAY_ID_TAG[1], today);
         day.put(DAY_ID_TAG[2], tomorrow);
-
     }
 
 
-    public void setTable(String arrivalOrDeparting) {
+    public void setTable() {
         try {
             System.setProperty("javax.net.ssl.trustStore", "cer/11.jks");
-            Document document = (Document) Jsoup.connect("https://hrk.aero/table/ajax_tablo_new.php?lang=ru&full=1&first=1").get();
-            Element nameTable = document.getElementById(arrivalOrDeparting);
+            Document document = (Document) Jsoup.connect(ParseSchedule.PATH).get();
+            Element arrivalTable = document.getElementById(ARRIVAL_ID_TAG);
+            Element departingTable = document.getElementById(DEPARTING_ID_TAG);
             for (int i = 0; i < DAY_ID_TAG.length; i++) {
-                Elements tagTable = nameTable.getElementsByClass(CLASS_TD_HTML + DAY_ID_TAG[i]);
-                getParse(tagTable, DAY_ID_TAG[i]);
+                Elements tagArrivalTable = arrivalTable.getElementsByClass(CLASS_TD_HTML + DAY_ID_TAG[i]);
+                Elements tagDepartingTable = departingTable.getElementsByClass(CLASS_TD_HTML + DAY_ID_TAG[i]);
+                getParse(tagArrivalTable, DAY_ID_TAG[i], ARRIVAL_ID_TAG);
+                getParse(tagDepartingTable, DAY_ID_TAG[i], DEPARTING_ID_TAG);
             }
-
         } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
 
-    private void getParse(Elements tableElements, String classTag) {
+    private void getParse(Elements tableElements, String classTag, String arrivalOrDeparting) {
         String date = "";
         if (day.containsKey(classTag)) {
             date = String.format(" %02d.%02d.%02d", day.get(classTag).get(Calendar.DATE),
                     day.get(classTag).get(Calendar.MONTH) + 1, day.get(classTag).get(Calendar.YEAR));
         }
-
-        for (int i = 0; i < tableElements.size(); i++) {
-            table.add(new Flight(
-                    tableElements.get(i).child(0).text(),
-                    tableElements.get(i).child(1).text(),
-                    tableElements.get(i).child(2).text() + date,
-                    tableElements.get(i).child(3).text()
-            ));
+        if (arrivalOrDeparting.equals(ARRIVAL_ID_TAG)) {
+            for (int i = 0; i < tableElements.size(); i++) {
+                tableArrival.add(new Flight(
+                        tableElements.get(i).child(0).text(),
+                        tableElements.get(i).child(1).text(),
+                        tableElements.get(i).child(2).text() + date,
+                        tableElements.get(i).child(3).text()
+                ));
+            }
+        } else if (arrivalOrDeparting.equals(DEPARTING_ID_TAG)) {
+            for (int i = 0; i < tableElements.size(); i++) {
+                tableDeparting.add(new Flight(
+                        tableElements.get(i).child(0).text(),
+                        tableElements.get(i).child(1).text(),
+                        tableElements.get(i).child(2).text() + date,
+                        tableElements.get(i).child(3).text()
+                ));
+            }
         }
     }
 
-    public List<Flight> getTable() {
-        return table;
+    public List<Flight> getTableArrival() {
+        return tableArrival;
+    }
+
+    public List<Flight> getTableDeparting() {
+        return tableDeparting;
     }
 }

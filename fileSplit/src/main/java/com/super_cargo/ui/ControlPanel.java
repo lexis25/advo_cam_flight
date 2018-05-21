@@ -177,7 +177,7 @@ public class ControlPanel extends Application {
     }
 
     public class Controller {
-        private String addressURL = "https://hrk.aero/table/ajax_tablo_new.php?lang=ru&full=1&first=1";
+        private String addressURL;
         private String from;
         private String before;
         private boolean txtFile;
@@ -187,7 +187,7 @@ public class ControlPanel extends Application {
             groupAddress.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
                 public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
                     if (groupAddress.getSelectedToggle().getUserData().equals("default")) {
-                        addressURL = "https://hrk.aero/table/ajax_tablo_new.php?lang=ru&full=1&first=1";
+                        addressURL = ParseSchedule.PATH;
                     } else {
                         addressURL = textURL.getText();
                     }
@@ -222,14 +222,11 @@ public class ControlPanel extends Application {
             start.setOnAction(new EventHandler<ActionEvent>() {
                 public void handle(ActionEvent event) {
                     if (from != null && before != null) {
-                        ParseSchedule tableDeparting = new ParseSchedule();
-                        ParseSchedule tableArrival = new ParseSchedule();
+                        ParseSchedule table = new ParseSchedule();
+                        table.setTable();
 
-                        tableDeparting.setTable(ParseSchedule.DEPARTING_ID_TAG);
-                        List<Flight> departing = tableDeparting.getTable();
-
-                        tableArrival.setTable(ParseSchedule.ARRIVAL_ID_TAG);
-                        List<Flight> arrival = tableArrival.getTable();
+                        List<Flight> departing = table.getTableDeparting();
+                        List<Flight> arrival = table.getTableArrival();
 
                         Calendar past = Calendar.getInstance();
                         Calendar future = Calendar.getInstance();
