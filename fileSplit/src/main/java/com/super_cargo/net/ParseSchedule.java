@@ -49,38 +49,28 @@ public class ParseSchedule {
             for (int i = 0; i < DAY_ID_TAG.length; i++) {
                 Elements tagArrivalTable = arrivalTable.getElementsByClass(CLASS_TD_HTML + DAY_ID_TAG[i]);
                 Elements tagDepartingTable = departingTable.getElementsByClass(CLASS_TD_HTML + DAY_ID_TAG[i]);
-                getParse(tagArrivalTable, DAY_ID_TAG[i], ARRIVAL_ID_TAG);
-                getParse(tagDepartingTable, DAY_ID_TAG[i], DEPARTING_ID_TAG);
+                getParse(tagArrivalTable, DAY_ID_TAG[i], tableArrival);
+                getParse(tagDepartingTable, DAY_ID_TAG[i], tableDeparting);
             }
         } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
 
-    private void getParse(Elements tableElements, String classTag, String arrivalOrDeparting) {
+    private void getParse(Elements tableElements, String classTag, List<Flight> array) {
         String date = "";
         if (day.containsKey(classTag)) {
             date = String.format(" %02d.%02d.%02d", day.get(classTag).get(Calendar.DATE),
                     day.get(classTag).get(Calendar.MONTH) + 1, day.get(classTag).get(Calendar.YEAR));
         }
-        if (arrivalOrDeparting.equals(ARRIVAL_ID_TAG)) {
-            for (int i = 0; i < tableElements.size(); i++) {
-                tableArrival.add(new Flight(
-                        tableElements.get(i).child(0).text(),
-                        tableElements.get(i).child(1).text(),
-                        tableElements.get(i).child(2).text() + date,
-                        tableElements.get(i).child(3).text()
-                ));
-            }
-        } else if (arrivalOrDeparting.equals(DEPARTING_ID_TAG)) {
-            for (int i = 0; i < tableElements.size(); i++) {
-                tableDeparting.add(new Flight(
-                        tableElements.get(i).child(0).text(),
-                        tableElements.get(i).child(1).text(),
-                        tableElements.get(i).child(2).text() + date,
-                        tableElements.get(i).child(3).text()
-                ));
-            }
+
+        for (int i = 0; i < tableElements.size(); i++) {
+            array.add(new Flight(
+                    tableElements.get(i).child(0).text(),
+                    tableElements.get(i).child(1).text(),
+                    tableElements.get(i).child(2).text() + date,
+                    tableElements.get(i).child(3).text()
+            ));
         }
     }
 

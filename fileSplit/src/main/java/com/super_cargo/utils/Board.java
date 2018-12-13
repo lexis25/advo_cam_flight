@@ -73,7 +73,6 @@ public abstract class Board {
             }
         }
         Collections.sort(listCouple, new Flight.TimeCompare());
-
         return listCouple;
     }
 

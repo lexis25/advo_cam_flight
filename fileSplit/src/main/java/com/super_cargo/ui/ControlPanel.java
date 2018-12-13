@@ -17,8 +17,10 @@ import javafx.scene.control.*;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.List;
@@ -28,6 +30,7 @@ public class ControlPanel extends Application {
     private RadioButton def;
     private RadioButton newURL;
     private TextField textURL;
+
     private ComboBox comboBoxFrom;
     private ComboBox comboBoxBefore;
     private ToggleGroup groupFiles;
@@ -35,8 +38,10 @@ public class ControlPanel extends Application {
     private RadioButton excel;
     private Button cancel;
     private Button start;
-    private RadioButton saveDefPath;
-    private RadioButton saveNewPath;
+    private Button pathDirectory;
+    private Label labelSaveFile;
+
+    private final String SAVE_AS = "Save files in ";
 
 
     public void start(Stage primaryStage) throws Exception {
@@ -81,6 +86,7 @@ public class ControlPanel extends Application {
         textURL = new TextField();
         textURL.setPromptText("www.address.com");
         textURL.setPadding(new Insets(5));
+        textURL.setEditable(false);
 
         addressVBox.getChildren().addAll(def, newURL, textURL);
 
@@ -157,21 +163,12 @@ public class ControlPanel extends Application {
 
         cancel = new Button("cancel");
         start = new Button(" start ");
+        pathDirectory = new Button("new path");
 
-        Label labelSaveFile = new Label("set default path directory");
+        labelSaveFile = new Label( SAVE_AS +"to default directory " + WriterFolder.getPath());
 
-        ToggleGroup group = new ToggleGroup();
-        saveDefPath = new RadioButton("default");
-        saveDefPath.setPadding(new Insets(5));
-        saveDefPath.setSelected(true);
-        saveDefPath.setToggleGroup(group);
-
-        saveNewPath = new RadioButton("new path");
-        saveNewPath.setPadding(new Insets(5));
-        saveNewPath.setToggleGroup(group);
-
-        buttonHBox.getChildren().addAll(cancel, start);
-        buttonVBox.getChildren().addAll(labelSaveFile, saveDefPath, saveNewPath, buttonHBox);
+        buttonHBox.getChildren().addAll(pathDirectory, cancel, start);
+        buttonVBox.getChildren().addAll(labelSaveFile, buttonHBox);
 
         return buttonVBox;
     }
@@ -188,8 +185,10 @@ public class ControlPanel extends Application {
                 public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
                     if (groupAddress.getSelectedToggle().getUserData().equals("default")) {
                         addressURL = ParseSchedule.PATH;
+                        textURL.setEditable(false);
                     } else {
                         addressURL = textURL.getText();
+                        textURL.setEditable(true);
                     }
                 }
             });
@@ -198,7 +197,7 @@ public class ControlPanel extends Application {
 
                 public void changed(ObservableValue observable, Object oldValue, Object newValue) {
                     from = newValue.toString();
-
+                    
                 }
             });
 
@@ -216,6 +215,14 @@ public class ControlPanel extends Application {
                     } else if (groupFiles.getSelectedToggle().getUserData().equals("Create excel file schedule")) {
                         excelFile = true;
                     }
+                }
+            });
+
+            pathDirectory.setOnAction(new EventHandler<ActionEvent>() {
+                public void handle(ActionEvent event) {
+                    File path = new DirectoryChooser().showDialog(new Stage());
+                    WriterFolder.setPaths(path.getAbsolutePath());
+                    labelSaveFile.setText(SAVE_AS + String.valueOf(path.getAbsoluteFile()));
                 }
             });
 

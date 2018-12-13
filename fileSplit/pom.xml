@@ -7,11 +7,5 @@
     <groupId>fileSplit</groupId>
     <artifactId>fileSplit</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <dependency>
-        <!-- jsoup HTML parser library @ http://jsoup.org/ -->
-        <groupId>org.jsoup</groupId>
-        <artifactId>jsoup</artifactId>
-        <version>1.10.2</version>
-    </dependency>
 
 </project>
