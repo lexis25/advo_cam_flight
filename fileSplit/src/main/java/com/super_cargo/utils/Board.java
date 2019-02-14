@@ -8,7 +8,7 @@ import java.util.Collections;
 import java.util.List;
 
 
-public abstract class Board {
+public class Board {
 
     public static List<Flight> getTimeInterval(int hourStart, int minuteStart, int dayStart,
                                                int hourFinish, int minuteFinish, int dayEnd,

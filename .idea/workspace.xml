@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="56f88399-d70f-4e78-b28c-667611878692" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fileSplit/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/fileSplit/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fileSplit/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/fileSplit/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fileSplit/src/main/java/com/super_cargo/net/ParseSchedule.java" beforeDir="false" afterPath="$PROJECT_DIR$/fileSplit/src/main/java/com/super_cargo/net/ParseSchedule.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fileSplit/src/main/java/com/super_cargo/ui/ControlPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/fileSplit/src/main/java/com/super_cargo/ui/ControlPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fileSplit/src/main/java/com/super_cargo/utils/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/fileSplit/src/main/java/com/super_cargo/utils/Board.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -108,31 +104,37 @@
   <component name="ToolWindowManager">
     <frame x="-8" y="0" width="1290" height="1000" extended-state="0" />
     <layout>
+      <window_info anchor="right" id="Key Promoter X" />
       <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="right" id="Palette&#9;" order="3" />
-      <window_info id="Image Layers" order="2" />
-      <window_info anchor="right" id="Capture Analysis" order="3" />
+      <window_info anchor="bottom" id="DB Execution Console" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="right" id="Maven Projects" order="3" />
-      <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info content_ui="combo" id="Project" order="0" weight="0.25" />
+      <window_info id="Project Explorer" />
+      <window_info id="Job Explorer" />
+      <window_info anchor="bottom" id="Console" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info id="DB Browser" />
+      <window_info anchor="right" id="Palette&#9;" order="3" />
+      <window_info id="Image Layers" order="2" />
+      <window_info anchor="right" id="Capture Analysis" order="3" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Terminal" order="7" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.25" />
       <window_info anchor="right" id="Theme Preview" order="3" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="right" id="Properties" order="3" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info id="Nl-Palette" order="2" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Messages" order="7" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
-      <window_info id="Nl-Palette" order="2" />
+      <window_info anchor="right" id="Properties" order="3" />
       <window_info anchor="right" id="Key Promoter" order="4" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />

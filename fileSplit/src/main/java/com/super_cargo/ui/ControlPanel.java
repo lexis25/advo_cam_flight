@@ -141,6 +141,7 @@ public class ControlPanel extends Application {
         txt = new RadioButton("Create txt file schedule");
         txt.setSelected(true);
         txt.setPadding(new Insets(5));
+
         txt.setToggleGroup(groupFiles);
         txt.setUserData("Create txt file schedule");
 
