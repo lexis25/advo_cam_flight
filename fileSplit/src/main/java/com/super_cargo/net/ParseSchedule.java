@@ -42,7 +42,7 @@ public class ParseSchedule {
 
     public void setTable() {
         try {
-            System.setProperty("javax.net.ssl.trustStore", "cer/11.jks");
+           // System.setProperty("javax.net.sl.trustStore", "cer/covid.jks");
             Document document = (Document) Jsoup.connect(ParseSchedule.PATH).get();
             Element arrivalTable = document.getElementById(ARRIVAL_ID_TAG);
             Element departingTable = document.getElementById(DEPARTING_ID_TAG);
