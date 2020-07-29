@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="fileSplit">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/fileSplit/out/artifacts/fileSplit_jar/fileSplit.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

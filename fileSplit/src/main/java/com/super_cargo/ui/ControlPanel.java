@@ -222,8 +222,8 @@ public class ControlPanel extends Application {
             pathDirectory.setOnAction(new EventHandler<ActionEvent>() {
                 public void handle(ActionEvent event) {
                     File path = new DirectoryChooser().showDialog(new Stage());
-                    WriterFolder.setPaths(path.getAbsolutePath());
-                    labelSaveFile.setText(SAVE_AS + String.valueOf(path.getAbsoluteFile()));
+                    WriterFolder.setPath(path.getAbsolutePath()+"\\");
+                    labelSaveFile.setText(SAVE_AS + String.valueOf(path.getAbsoluteFile() +"\\"));
                 }
             });
 

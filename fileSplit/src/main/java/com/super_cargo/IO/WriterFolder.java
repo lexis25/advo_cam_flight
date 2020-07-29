@@ -11,7 +11,7 @@ import java.util.List;
 
 public class WriterFolder {
 
-    private static String path_save_files = "h:/FOLDER/";
+    private static String path_save_files = "c:\\";
     private static final Calendar flag = Calendar.getInstance();
 
     public static void createFolders(List<Flight> schedule) {
@@ -70,7 +70,7 @@ public class WriterFolder {
         return path_save_files;
     }
 
-    public static void setPaths(String path_save_files) {
-        WriterFolder.path_save_files = path_save_files;
+    public static void setPath(String path) {
+        WriterFolder.path_save_files = path;
     }
 }

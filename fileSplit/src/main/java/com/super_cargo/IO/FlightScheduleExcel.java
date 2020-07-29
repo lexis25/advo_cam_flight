@@ -15,7 +15,6 @@ public class FlightScheduleExcel {
     private static final String[] DEPARTING = {"№ Рейса", "Вылет", "Ст", "Регист.", "Время", "П", "Б"};
     private static final int[] arraySize = {3500, 7500, 1500, 3000, 3000, 1800, 1800};
     private static final SimpleDateFormat PATTERN = new SimpleDateFormat("HH:mm");
-    private static final String PATH = "H:/FOLDER/scheduleExcel.xls";
 
     private static HSSFWorkbook book;
 
@@ -78,7 +77,7 @@ public class FlightScheduleExcel {
 
         fillCell(departingList, false, rowDeparting, departingSheet, styleContains, styleCenterCell);
 
-        FileOutputStream fos = new FileOutputStream(PATH);
+        FileOutputStream fos = new FileOutputStream(WriterFolder.getPath() + "/scheduleExcel.xls");
         book.write(fos);
         fos.close();
     }
