@@ -2,20 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="633bd488-464a-4050-b53c-d0ed2aee36a1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/fileSplit.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/fileSplit2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/advo_cam_flight.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fileSplit/cer/covid.jks" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fileSplit/cer/11.jks" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fileSplit/src/main/java/com/super_cargo/IO/FlightScheduleExcel.java" beforeDir="false" afterPath="$PROJECT_DIR$/fileSplit/src/main/java/com/super_cargo/IO/FlightScheduleExcel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fileSplit/src/main/java/com/super_cargo/IO/WriterFolder.java" beforeDir="false" afterPath="$PROJECT_DIR$/fileSplit/src/main/java/com/super_cargo/IO/WriterFolder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fileSplit/src/main/java/com/super_cargo/ui/ControlPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/fileSplit/src/main/java/com/super_cargo/ui/ControlPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fileSplit/src/main/java/META-INF/MANIFEST.MF" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,7 +23,10 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/fileSplit/cer" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/out/production/advo_cam_flight/META-INF" />
+    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -130,26 +122,38 @@
       <screen x="0" y="0" width="1280" height="984" />
     </state>
     <state x="400" y="293" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1280.984@0.0.1280.984" timestamp="1595749021323" />
+    <state x="370" y="281" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1596372572111">
+      <screen x="0" y="0" width="1280" height="984" />
+    </state>
+    <state x="370" y="281" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1280.984@0.0.1280.984" timestamp="1596372572111" />
     <state x="267" y="59" key="CommitChangelistDialog2" timestamp="1596049029146">
       <screen x="0" y="0" width="1280" height="984" />
     </state>
     <state x="267" y="59" key="CommitChangelistDialog2/0.0.1280.984@0.0.1280.984" timestamp="1596049029146" />
-    <state width="1236" height="157" key="GridCell.Tab.0.bottom" timestamp="1596047866807">
+    <state x="481" y="238" key="FileChooserDialogImpl" timestamp="1596372446838">
       <screen x="0" y="0" width="1280" height="984" />
     </state>
-    <state width="1236" height="157" key="GridCell.Tab.0.bottom/0.0.1280.984@0.0.1280.984" timestamp="1596047866807" />
-    <state width="1236" height="157" key="GridCell.Tab.0.center" timestamp="1596047866807">
+    <state x="481" y="238" key="FileChooserDialogImpl/0.0.1280.984@0.0.1280.984" timestamp="1596372446838" />
+    <state width="1236" height="157" key="GridCell.Tab.0.bottom" timestamp="1596049310209">
       <screen x="0" y="0" width="1280" height="984" />
     </state>
-    <state width="1236" height="157" key="GridCell.Tab.0.center/0.0.1280.984@0.0.1280.984" timestamp="1596047866807" />
-    <state width="1236" height="157" key="GridCell.Tab.0.left" timestamp="1596047866806">
+    <state width="1236" height="157" key="GridCell.Tab.0.bottom/0.0.1280.984@0.0.1280.984" timestamp="1596049310209" />
+    <state width="1236" height="157" key="GridCell.Tab.0.center" timestamp="1596049310208">
       <screen x="0" y="0" width="1280" height="984" />
     </state>
-    <state width="1236" height="157" key="GridCell.Tab.0.left/0.0.1280.984@0.0.1280.984" timestamp="1596047866806" />
-    <state width="1236" height="157" key="GridCell.Tab.0.right" timestamp="1596047866807">
+    <state width="1236" height="157" key="GridCell.Tab.0.center/0.0.1280.984@0.0.1280.984" timestamp="1596049310208" />
+    <state width="1236" height="157" key="GridCell.Tab.0.left" timestamp="1596049310208">
       <screen x="0" y="0" width="1280" height="984" />
     </state>
-    <state width="1236" height="157" key="GridCell.Tab.0.right/0.0.1280.984@0.0.1280.984" timestamp="1596047866807" />
+    <state width="1236" height="157" key="GridCell.Tab.0.left/0.0.1280.984@0.0.1280.984" timestamp="1596049310208" />
+    <state width="1236" height="157" key="GridCell.Tab.0.right" timestamp="1596049310209">
+      <screen x="0" y="0" width="1280" height="984" />
+    </state>
+    <state width="1236" height="157" key="GridCell.Tab.0.right/0.0.1280.984@0.0.1280.984" timestamp="1596049310209" />
+    <state x="233" y="53" key="SettingsEditor" timestamp="1596372611544">
+      <screen x="0" y="0" width="1280" height="984" />
+    </state>
+    <state x="233" y="53" key="SettingsEditor/0.0.1280.984@0.0.1280.984" timestamp="1596372611544" />
     <state x="232" y="223" key="Vcs.Push.Dialog.v2" timestamp="1596048986520">
       <screen x="0" y="0" width="1280" height="984" />
     </state>
