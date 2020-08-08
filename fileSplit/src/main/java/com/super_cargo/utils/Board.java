@@ -131,12 +131,17 @@ public class Board {
     }
 
     public static void canceledFlights(List<Flight> schedule) {
+        String[] canceledMultiLanguage = {"Скасований", "Отменен", "Canceled"};
         CommentsCompare compare = new CommentsCompare();
         Collections.sort(schedule, compare);
         int result;
-        while ((result = Collections.binarySearch(schedule,
-                new Flight("", "", "", "Отменен"), compare)) >= 0) {
-            schedule.remove(result);
+        int i = 0;
+        while (i < canceledMultiLanguage.length) {
+            while ((result = Collections.binarySearch(schedule,
+                    new Flight("", "", "", canceledMultiLanguage[i]), compare)) >= 0) {
+                schedule.remove(result);
+            }
+            i++;
         }
         Collections.sort(schedule, new Flight.TimeCompare());
     }
