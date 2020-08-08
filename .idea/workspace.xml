@@ -6,15 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="633bd488-464a-4050-b53c-d0ed2aee36a1" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fileSplit/res/plane.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fileSplit/res/plugin.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fileSplit/res/question.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fileSplit/res/shop.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fileSplit/src/main/java/com/super_cargo/utils/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/fileSplit/src/main/java/com/super_cargo/utils/Board.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fileSplit/src/out/production/main/com/super_cargo/view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/fileSplit/src/out/production/main/com/super_cargo/view.fxml" afterDir="false" />
-    </list>
+    <list default="true" id="633bd488-464a-4050-b53c-d0ed2aee36a1" name="Default Changelist" comment="ssl error" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -124,7 +116,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="update new ssl sertificate for jsoup connection.&#10;fix bug with path ParseSchedule, FlightScheduleExcel,ControlPanel" />
-    <option name="LAST_COMMIT_MESSAGE" value="update new ssl sertificate for jsoup connection.&#10;fix bug with path ParseSchedule, FlightScheduleExcel,ControlPanel" />
+    <MESSAGE value="ssl error" />
+    <option name="LAST_COMMIT_MESSAGE" value="ssl error" />
   </component>
   <component name="WindowStateProjectService">
     <state x="400" y="293" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1595749021323">
