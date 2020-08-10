@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="ArtifactsWorkspaceSettings">
-    <artifacts-to-build>
-      <artifact name="advo_cam_flight:jar" />
-    </artifacts-to-build>
-  </component>
   <component name="ChangeListManager">
-    <list default="true" id="633bd488-464a-4050-b53c-d0ed2aee36a1" name="Default Changelist" comment="ssl error" />
+    <list default="true" id="633bd488-464a-4050-b53c-d0ed2aee36a1" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fileSplit/src/main/java/META-INF/MANIFEST.MF" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -116,8 +115,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="update new ssl sertificate for jsoup connection.&#10;fix bug with path ParseSchedule, FlightScheduleExcel,ControlPanel" />
-    <MESSAGE value="ssl error" />
-    <option name="LAST_COMMIT_MESSAGE" value="ssl error" />
+    <option name="LAST_COMMIT_MESSAGE" value="update new ssl sertificate for jsoup connection.&#10;fix bug with path ParseSchedule, FlightScheduleExcel,ControlPanel" />
   </component>
   <component name="WindowStateProjectService">
     <state x="400" y="293" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1595749021323">
@@ -136,22 +134,22 @@
       <screen x="0" y="0" width="1280" height="984" />
     </state>
     <state x="481" y="238" key="FileChooserDialogImpl/0.0.1280.984@0.0.1280.984" timestamp="1596372446838" />
-    <state width="1236" height="157" key="GridCell.Tab.0.bottom" timestamp="1596898790533">
+    <state width="1236" height="157" key="GridCell.Tab.0.bottom" timestamp="1596049310209">
       <screen x="0" y="0" width="1280" height="984" />
     </state>
-    <state width="1236" height="157" key="GridCell.Tab.0.bottom/0.0.1280.984@0.0.1280.984" timestamp="1596898790533" />
-    <state width="1236" height="157" key="GridCell.Tab.0.center" timestamp="1596898790530">
+    <state width="1236" height="157" key="GridCell.Tab.0.bottom/0.0.1280.984@0.0.1280.984" timestamp="1596049310209" />
+    <state width="1236" height="157" key="GridCell.Tab.0.center" timestamp="1596049310208">
       <screen x="0" y="0" width="1280" height="984" />
     </state>
-    <state width="1236" height="157" key="GridCell.Tab.0.center/0.0.1280.984@0.0.1280.984" timestamp="1596898790530" />
-    <state width="1236" height="157" key="GridCell.Tab.0.left" timestamp="1596898790504">
+    <state width="1236" height="157" key="GridCell.Tab.0.center/0.0.1280.984@0.0.1280.984" timestamp="1596049310208" />
+    <state width="1236" height="157" key="GridCell.Tab.0.left" timestamp="1596049310208">
       <screen x="0" y="0" width="1280" height="984" />
     </state>
-    <state width="1236" height="157" key="GridCell.Tab.0.left/0.0.1280.984@0.0.1280.984" timestamp="1596898790504" />
-    <state width="1236" height="157" key="GridCell.Tab.0.right" timestamp="1596898790532">
+    <state width="1236" height="157" key="GridCell.Tab.0.left/0.0.1280.984@0.0.1280.984" timestamp="1596049310208" />
+    <state width="1236" height="157" key="GridCell.Tab.0.right" timestamp="1596049310209">
       <screen x="0" y="0" width="1280" height="984" />
     </state>
-    <state width="1236" height="157" key="GridCell.Tab.0.right/0.0.1280.984@0.0.1280.984" timestamp="1596898790532" />
+    <state width="1236" height="157" key="GridCell.Tab.0.right/0.0.1280.984@0.0.1280.984" timestamp="1596049310209" />
     <state x="233" y="53" key="SettingsEditor" timestamp="1596372611544">
       <screen x="0" y="0" width="1280" height="984" />
     </state>
